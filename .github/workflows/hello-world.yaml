@@ -33,10 +33,10 @@ jobs:
           echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
           echo ok=$(echo $ok | cut -d '"' -f 3)
 
-      - name: Test the env variable  
-        id: InfoId
-        run: | 
-          echo $test 
+      # - name: Test the env variable  
+      #   id: InfoId
+      #   run: | 
+      #     echo $test 
 
       - name: Build ${{ env.example }} application
         env:
