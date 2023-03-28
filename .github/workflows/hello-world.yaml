@@ -23,13 +23,15 @@ jobs:
 
     steps: 
       - uses: actions/checkout@v2
-      - name: build sync between Ubuntu latest and the camera.
-        env:
-          DEVICE_IP: "172.25.65.98"
-          DEVICE_PASSWORD: 'pass'
-          # ARCH: "aarch64"
-        run: |
-          curl -s --anyauth -u root:"$DEVICE_PASSWORD" "http://$DEVICE_IP/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
+      - name: run for test
+          run: curl --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' https://172.25.65.98/axis-cgi/basicdeviceinfo.cgi
+      # - name: build sync between Ubuntu latest and the camera.
+      #   env:
+      #     DEVICE_IP: "172.25.65.98"
+      #     DEVICE_PASSWORD: 'pass'
+      #     # ARCH: "aarch64"
+      #   run: |
+      #     curl -s --anyauth -u root:"$DEVICE_PASSWORD" "http://$DEVICE_IP/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
         # ssh -V root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP' | echo "$DEVICE_PASSWORD"
 
         # docker run --rm axisecp/docker-acap:latest-${{ matrix.arch }} $DEVICE_IP $DEVICE_PASSWORD install
