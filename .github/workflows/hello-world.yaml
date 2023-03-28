@@ -20,14 +20,22 @@ jobs:
         include:
           - arch: aarch64
           # - arch: armv7hf
+
+    steps: 
+      - uses: actions/checkout@v2
+      - name: build sync between Ubuntu latest and the camera.
+        run:|
+          curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"
+          ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
+
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-buildx-action@v2
         with:
           install: true
-      - name: can i reach the camera
-        run: |
-          ping 172.25.65.98
+      # - name: can i reach the camera
+      #   run: |
+      #     ping 172.25.65.98
       # - name: Get the architecture from the camera
       #   run: |
       #     ok=$(curl -v -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
