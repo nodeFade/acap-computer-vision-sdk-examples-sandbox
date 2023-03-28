@@ -10,9 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:   
-      EXREPO: acap-computer-vision-examples
-      EXNAME: hello-world
-      EAPNAME: hello_world      
+      EXREPO: acap-computer-vision-examples-sandbox
+      EXNAME: hello-world    
       EXDIR: acap/examples/$EXNAME 
     strategy:
       matrix:
