@@ -25,6 +25,9 @@ jobs:
       - uses: docker/setup-buildx-action@v2
         with:
           install: true
+      - name: can i reach the camera
+        run: |
+          ping 172.25.65.98
       # - name: Get the architecture from the camera
       #   run: |
       #     ok=$(curl -v -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
