@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: build sync between Ubuntu latest and the camera.
         env:
-          DEVICE_IP: 172.25.65.98
+          DEVICE_IP: "172.25.65.98"
           DEVICE_PASSWORD: 'pass'
           # ARCH: "aarch64"
         run: |
