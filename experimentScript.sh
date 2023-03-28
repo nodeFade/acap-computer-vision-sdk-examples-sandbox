@@ -19,7 +19,9 @@
 # scp ca.pem server-cert.pem server-key.pem root@$DEVICE_IP:/usr/local/packages/dockerdwrapper/
 
 
-for i in {1..10}; do
-    sleep 1
-    echo $i
-done
+# for i in {1..10}; do
+#     sleep 1
+#     echo $i
+# done
+ok=$(curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
+          echo  "response from curl= ${ok}" 
