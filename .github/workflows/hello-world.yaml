@@ -5,7 +5,7 @@ on:
     paths:
       - 'hello-world/**'
       - '!hello-world/README.md'
-      - '.github/workflows/hello-world.yml'
+      - '.github/workflows/hello-world.yaml'
   pull_request:
 jobs:
   build:
