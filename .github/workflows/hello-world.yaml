@@ -24,8 +24,8 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
       - name: run for test
-          run: |
-           curl --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' https://172.25.65.98/axis-cgi/basicdeviceinfo.cgi
+        run: |
+          curl --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' https://172.25.65.98/axis-cgi/basicdeviceinfo.cgi
       # - name: build sync between Ubuntu latest and the camera.
       #   env:
       #     DEVICE_IP: "172.25.65.98"
