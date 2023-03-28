@@ -23,6 +23,13 @@ jobs:
 
     steps: 
       - uses: actions/checkout@v2
+      - name: running time
+        run: | 
+          for i in {1..5}; do
+              sleep 1
+              echo $i
+          done
+
       - name: run for test
         run: |
           curl --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' https://172.25.65.98/axis-cgi/basicdeviceinfo.cgi
