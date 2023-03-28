@@ -30,7 +30,7 @@ jobs:
           # ARCH: "aarch64"
         run: |
           curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
-          sshpass -p "pass" ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
+          sshpass -v -p "pass" ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
 
           docker run --rm axisecp/docker-acap:latest-${{ matrix.arch }} $DEVICE_IP $DEVICE_PASSWORD install
           curl -s --anyauth -u "root:$DEVICE_PASSWORD" "http://$DEVICE_IP/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
