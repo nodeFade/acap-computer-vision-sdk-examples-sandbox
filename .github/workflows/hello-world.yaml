@@ -7,7 +7,6 @@ on:
       - '!hello-world/README.md'
       - '.github/workflows/hello-world.yml'
   pull_request:
-
 jobs:
   build:
     runs-on: ubuntu-latest
