@@ -34,7 +34,7 @@ jobs:
           echo ok=$(echo $ok | cut -d '"' -f 3)
 
       - name: Test the env variable  
-        id: grabInfoId
+        id: InfoId
         run: | 
           echo $test 
 
