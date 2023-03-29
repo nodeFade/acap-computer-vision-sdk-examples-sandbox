@@ -59,7 +59,6 @@ jobs:
           DEVICE_IP: "172.25.65.98"
           DOCKER_CERT_PATH: acap-computer-vision-sdk-examples-sandbox\hello-world\tls-certs
         run: |
-          ls DOCKER_CERT_PATH
           echo "$DOCKER_PORT"
           echo "$DEVICE_IP"
           echo $(pwd)
