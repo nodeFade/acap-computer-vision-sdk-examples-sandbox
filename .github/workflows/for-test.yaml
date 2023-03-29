@@ -1,7 +1,7 @@
 name: Build hello-world application
 on: 
   push:    
-    - main
+    [ main ]
 jobs:        
   build:     
     runs-on: ubuntu-latest 
