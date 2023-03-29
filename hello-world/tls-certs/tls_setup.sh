@@ -54,7 +54,7 @@ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
 chmod -v 0400 ca-key.pem server-key.pem
 chmod -v 0444 ca.pem server-cert.pem cert.pem key.pem
 # Verify ssh is enabled on host:
-curl -s --noproxy "*" --anyauth -u root:$PASS "http://$HOST:2375/axis-cgi/param.cgi?action=update&Network.SSH.Enabled=yes"
+curl -s --noproxy "*" --anyauth -u root:$PASS "http://$HOST/axis-cgi/param.cgi?action=update&Network.SSH.Enabled=yes"
 # Make the Docker daemon only accept connections from clients providing a certificate trusted by your CA:
 echo "Step 9: Copy certificate to DUT"
 sudo apt-get install sshpass
