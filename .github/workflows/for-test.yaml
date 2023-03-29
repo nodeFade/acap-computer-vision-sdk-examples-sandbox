@@ -1,16 +1,16 @@
-name: CI on push
-
-on:
-  push:
-    branches: [main]
- 
+name: learn-github-actions
+on: [push]
 jobs:
-  build:
-    runs-on: self-hosted
-    
+  check-bats-version:
+    runs-on:
+      group: ubuntu-runners
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
         
       - name: Loop for spending time.
         run: | 
