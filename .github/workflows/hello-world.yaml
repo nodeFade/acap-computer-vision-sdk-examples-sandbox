@@ -28,8 +28,13 @@ jobs:
               echo $i
           done
 
-      # - name: run for test
-      #   run: |
+      - name: run for test
+        run: |
+          export ARCH=aarch64
+          export APP_NAME=hello-world
+          ls env
+          docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+
       #     ok=$(curl -v -s --noproxy - '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' http://172.25.65.98:2375/axis-cgi/basicdeviceinfo.cgi)
       #     echo  "response from curl= $ok" 
       #     ok=${ok#*Architecture}
@@ -37,12 +42,12 @@ jobs:
       #     echo ok=$(echo $ok | cut -d '"' -f 3) >> $GITHUB_ENV
 
 
-      - name: build sync between Ubuntu latest and the camera.
-        env:
-          DEVICE_IP: "172.25.65.98"
-          DEVICE_PASSWORD: 'pass'
-        run: |
-          curl -v -s --anyauth -u root:"$DEVICE_PASSWORD" "http://$DEVICE_IP/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
+      # - name: build sync between Ubuntu latest and the camera.
+      #   env:
+      #     DEVICE_IP: "172.25.65.98"
+      #     DEVICE_PASSWORD: 'pass'
+      #   run: |
+      #     curl -v -s --anyauth -u root:"$DEVICE_PASSWORD" "http://$DEVICE_IP/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
         # ssh -V root@$DEVICE_IP 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP' | echo "$DEVICE_PASSWORD"
 
         # docker run --rm axisecp/docker-acap:latest-${{ matrix.arch }} $DEVICE_IP $DEVICE_PASSWORD install
