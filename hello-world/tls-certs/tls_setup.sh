@@ -61,3 +61,5 @@ sudo apt-get install sshpass
 ls
 sshpass -v -p $PASS scp -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ca.pem server-cert.pem server-key.pem root@$HOST:/usr/local/packages/dockerdwrapper
 # scp -v -p $PASS -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ca.pem server-cert.pem server-key.pem root@172.25.65.98:/usr/local/packages/dockerdwrapper/
+sshpass -v -p $PASS ssh root@172.25.65.98 
+ls /usr/local/packages/dockerdwrapper
