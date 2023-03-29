@@ -12,7 +12,7 @@ jobs:
     env:   
       EXREPO: acap-computer-vision-examples-sandbox
       EXNAME: hello-world    
-      EXDIR: acap/examples/$EXNAME 
+
     strategy:
       matrix:
         include:
@@ -28,7 +28,7 @@ jobs:
               echo $i
           done
 
-      - name: run for test
+      - name: Build the image.
         run: |
           export ARCH=aarch64
           export APP_NAME=hello-world
@@ -36,6 +36,15 @@ jobs:
           cd ${{env.EXNAME}}
           echo $(pwd)
           docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+
+      - name: Set your device IP address and clear Docker memory.
+        env: 
+          DOCKER_PORT: 2376
+          DEVICE_IP: "172.25.65.98"
+        run: |
+          echo "$DOCKER_PORT"
+          echo "$DEVICE_IP"
+          docker --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
 
       #     ok=$(curl -v -s --noproxy - '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' http://172.25.65.98:2375/axis-cgi/basicdeviceinfo.cgi)
       #     echo  "response from curl= $ok" 
