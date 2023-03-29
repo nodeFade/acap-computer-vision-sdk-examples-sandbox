@@ -28,18 +28,20 @@ jobs:
               echo $i
           done
 
-      - name: Build the image.
-        run: |
-          export ARCH=aarch64
-          export APP_NAME=hello-world
-          echo $(pwd)
-          cd ${{env.EXNAME}}
-          echo $(pwd)
-          docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+      # - name: Build the image.
+      #   run: |
+      #     export ARCH=aarch64
+      #     export APP_NAME=hello-world
+      #     echo $(pwd)
+      #     cd ${{env.EXNAME}}
+      #     echo $(pwd)
+      #     docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+
       - name: create certificate for handshake.
         run: |
+          cd hello-world/tls-certs
           echo $(pwd)
-          cd hello-world/tls-certs chmod +x tls_setup.sh
+          chmod +x tls_setup.sh
           echo $(pwd)
           sh tls_setup.sh 172.25.65.98 dockerdwrapper
 
