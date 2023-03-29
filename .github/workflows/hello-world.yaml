@@ -43,7 +43,7 @@ jobs:
           echo $(pwd)
           chmod +x tls_setup.sh
           echo $(pwd)
-          sh tls_setup.sh 172.25.65.98 dockerdwrapper
+          sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
 
 
       - name: Set your device IP address and clear Docker memory.
