@@ -39,7 +39,7 @@ jobs:
       - name: create certificate for handshake.
         run: |
           echo $(pwd)
-          cd tls-certs chmod +x tls_setup.sh
+          cd hello-world/tls-certs chmod +x tls_setup.sh
           echo $(pwd)
           sh tls_setup.sh 172.25.65.98 dockerdwrapper
 
