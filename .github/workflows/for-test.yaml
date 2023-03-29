@@ -20,6 +20,7 @@ jobs:
           done
       - name: test to get architecture on another camera
         run: |
+          ping 8.8.8.8
           ok=$(curl -v -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.70.46/axis-cgi/basicdeviceinfo.cgi)
           echo  "response from curl= $ok" 
           ok=${ok#*Architecture}
