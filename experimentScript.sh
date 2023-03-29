@@ -23,11 +23,8 @@
 #     sleep 1
 #     echo $i
 # done
-# ok=$(curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
-# echo  "response from curl= $ok" 
-# ok=${ok#*Architecture}
-# echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
-# echo ok=$(echo $ok | cut -d '"' -f 3)
-
-curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
-ssh -V root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP' | echo "pass"
+ok=$(curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
+echo  "response from curl= $ok" 
+ok=${ok#*Architecture}
+echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
+echo ok=$(echo $ok | cut -d '"' -f 3)
