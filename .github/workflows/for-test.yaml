@@ -31,3 +31,4 @@ jobs:
           ok=${ok#*Architecture}
           echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
           echo ok=$(echo $ok | cut -d '"' -f 3)
+          
