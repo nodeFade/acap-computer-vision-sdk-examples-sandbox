@@ -1,0 +1,9 @@
+﻿{
+  "agentId": 24,
+  "agentName": "PCCZC1388GSH",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelines.actions.githubusercontent.com/ThfyzASqrZgskKrTtwUN1fn36ry8Y162V0CVJBCDX5Ow073eVD",
+  "gitHubUrl": "https://github.com/nodeFade/acap-computer-vision-sdk-examples-sandbox",
+  "workFolder": "notneeded_work"
+}
