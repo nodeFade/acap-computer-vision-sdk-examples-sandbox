@@ -58,4 +58,4 @@ curl -s --noproxy "*" --anyauth -u root:$PASS "http://$HOST/axis-cgi/param.cgi?a
 # Make the Docker daemon only accept connections from clients providing a certificate trusted by your CA:
 echo "Step 9: Copy certificate to DUT"
 # sshpass -v -p $PASS scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ca.pem server-cert.pem server-key.pem root@$HOST:/usr/local/packages/$LOCATION
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ca.pem server-cert.pem server-key.pem root@172.25.65.98:/usr/local/packages/dockerdwrapper/
+scp -v -p $PASS -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ca.pem server-cert.pem server-key.pem root@172.25.65.98:/usr/local/packages/dockerdwrapper/
