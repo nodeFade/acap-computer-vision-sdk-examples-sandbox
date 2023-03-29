@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "nodeFade/acap-computer-vision-sdk-examples-sandbox",
+  "pipelineDirectory": "acap-computer-vision-sdk-examples-sandbox",
+  "workspaceDirectory": "acap-computer-vision-sdk-examples-sandbox\\acap-computer-vision-sdk-examples-sandbox",
+  "repositories": {
+    "nodeFade/acap-computer-vision-sdk-examples-sandbox": {
+      "repositoryPath": "acap-computer-vision-sdk-examples-sandbox\\acap-computer-vision-sdk-examples-sandbox",
+      "lastRunOn": "03/29/2023 14:51:42 +02:00"
+    }
+  },
+  "lastRunOn": "03/29/2023 14:52:24 +02:00"
+}
