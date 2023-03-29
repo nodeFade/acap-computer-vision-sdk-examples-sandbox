@@ -44,29 +44,8 @@ jobs:
         run: |
           echo "$DOCKER_PORT"
           echo "$DEVICE_IP"
-          docker --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
+        # docker --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
 
-      #     ok=$(curl -v -s --noproxy - '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getAllProperties"}' http://172.25.65.98:2375/axis-cgi/basicdeviceinfo.cgi)
-      #     echo  "response from curl= $ok" 
-      #     ok=${ok#*Architecture}
-      #     echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
-      #     echo ok=$(echo $ok | cut -d '"' -f 3) >> $GITHUB_ENV
-
-
-      # - name: build sync between Ubuntu latest and the camera.
-      #   env:
-      #     DEVICE_IP: "172.25.65.98"
-      #     DEVICE_PASSWORD: 'pass'
-      #   run: |
-      #     curl -v -s --anyauth -u root:"$DEVICE_PASSWORD" "http://$DEVICE_IP/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
-        # ssh -V root@$DEVICE_IP 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP' | echo "$DEVICE_PASSWORD"
-
-        # docker run --rm axisecp/docker-acap:latest-${{ matrix.arch }} $DEVICE_IP $DEVICE_PASSWORD install
-        # curl -s --anyauth -u "root:$DEVICE_PASSWORD" "http://$DEVICE_IP/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
-
-
-        # cd hello-world/tls-certs
-        # scp ca.pem server-cert.pem server-key.pem root@$DEVICE_IP:/usr/local/packages/dockerdwrapper/
 
 
 
@@ -85,11 +64,6 @@ jobs:
       #     ok=${ok#*Architecture}
       #     echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
       #     echo ok=$(echo $ok | cut -d '"' -f 3)
-
-      # - name: Test the env variable  
-      #   id: InfoId
-      #   run: | 
-      #     echo $test 
 
       # - name: Build ${{ env.example }} application
       #   env:
