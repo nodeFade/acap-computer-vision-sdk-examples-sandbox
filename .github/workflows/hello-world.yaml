@@ -8,7 +8,7 @@ on:
       - '.github/workflows/hello-world.yaml'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:   
       EXREPO: acap-computer-vision-examples-sandbox
       EXNAME: hello-world    
@@ -28,14 +28,14 @@ jobs:
               echo $i
           done
 
-      # - name: Build the image.
-      #   run: |
-      #     export ARCH=aarch64
-      #     export APP_NAME=hello-world
-      #     echo $(pwd)
-      #     cd ${{env.EXNAME}}
-      #     echo $(pwd)
-      #     docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+      - name: Build the image.
+        run: |
+          export ARCH=aarch64
+          export APP_NAME=hello-world
+          echo $(pwd)
+          cd ${{env.EXNAME}}
+          echo $(pwd)
+          docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
 
       - name: create certificate for handshake.
         run: |
@@ -69,17 +69,6 @@ jobs:
     #   - uses: docker/setup-buildx-action@v2
     #     with:
     #       install: true
-      # - name: can i reach the camera
-      #   run: |
-      #     ping 172.25.65.98
-      # - name: Get the architecture from the camera
-      #   run: |
-      #     ok=$(curl -v -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0", "method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
-      #     echo  "response from curl= $ok" 
-      #     ok=${ok#*Architecture}
-      #     echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
-      #     echo ok=$(echo $ok | cut -d '"' -f 3)
-
       # - name: Build ${{ env.example }} application
       #   env:
       #     example: ${{ env.EXNAME }}
