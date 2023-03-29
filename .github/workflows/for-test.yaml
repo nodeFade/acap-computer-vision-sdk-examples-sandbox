@@ -9,9 +9,8 @@ jobs:
     runs-on: self-hosted
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         
       - name: Loop for spending time.
         run: | 
