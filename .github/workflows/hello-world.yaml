@@ -43,7 +43,8 @@ jobs:
           echo $(pwd)
           chmod +x tls_setup.sh
           echo $(pwd)
-          sh tls_setup.sh 172.25.65.98 dockerdwrapper
+          sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
+          scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ca.pem server-cert.pem server-key.pem root@172.25.65.98:/usr/local/packages/dockerdwrapper/
 
 
       - name: Set your device IP address and clear Docker memory.
@@ -53,6 +54,7 @@ jobs:
         run: |
           echo "$DOCKER_PORT"
           echo "$DEVICE_IP"
+          
         # docker --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
 
 
