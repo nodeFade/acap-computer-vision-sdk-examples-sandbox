@@ -1,16 +1,16 @@
-name: Build hello-world application
-on: [push]
-jobs:        
-  build:     
-    runs-on: ubuntu-latest 
-    strategy:       
-      matrix:     
-        arch: aarch64
+name: CI on push
 
-    steps:       
-      - uses: actions/checkout@v3 
-      - name: setup python
-        uses: actions/setup-python@v2
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
         
       - name: Loop for spending time.
         run: | 
