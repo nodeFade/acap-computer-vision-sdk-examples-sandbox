@@ -12,7 +12,7 @@ jobs:
     env:   
       EXREPO: acap-computer-vision-examples-sandbox
       EXNAME: hello-world    
-
+      WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
     strategy:
       matrix:
         include:
@@ -44,22 +44,26 @@ jobs:
       #     echo $(pwd)
       #     docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
 
-      - name: create certificate for handshake.
-        run: |
-          cd hello-world/tls-certs
-          echo $(pwd)
-          chmod +x tls_setup.sh
-          echo $(pwd)
-          sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
+      # - name: create certificate for handshake.
+      #   run: |
+      #     cd hello-world/tls-certs
+      #     echo $(pwd)
+      #     chmod +x tls_setup.sh
+      #     echo $(pwd)
+      #     sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
 
         
       - name: Set your device IP address and clear Docker memory.
         env: 
           DOCKER_PORT: 2376
           DEVICE_IP: "172.25.65.98"
+          DOCKER_CERT_PATH: acap-computer-vision-sdk-examples-sandbox\hello-world\tls-certs
         run: |
+          ls DOCKER_CERT_PATH
           echo "$DOCKER_PORT"
           echo "$DEVICE_IP"
+          echo $(pwd)
+          docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
           
         # docker --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
 
