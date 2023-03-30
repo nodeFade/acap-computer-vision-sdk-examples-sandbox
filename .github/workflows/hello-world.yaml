@@ -56,14 +56,14 @@ jobs:
           ls
           docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version
 
-      - name: Set your device IP address and clear Docker memory.
-        env: 
-          DOCKER_PORT: 2376
-          DEVICE_IP: "172.25.65.98"
-          DOCKER_CERT_PATH: hello-world\tls-certs
-        run: |
+      # - name: Set your device IP address and clear Docker memory.
+      #   env: 
+      #     DOCKER_PORT: 2376
+      #     DEVICE_IP: "172.25.65.98"
+      #     DOCKER_CERT_PATH: hello-world\tls-certs
+      #   run: |
           
-          echo $(pwd)
+      #     echo $(pwd)
         # export DOCKER_CERT_PATH="hello-world/tls-certs"
         # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
           
