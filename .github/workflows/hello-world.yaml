@@ -51,7 +51,7 @@ jobs:
       - name: get version client and server
         run: | 
           echo $(pwd)
-          cd /hello-world/tls-certs
+          cd /home/johanol/actions-runner-fadel/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/tls-certs
           docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version
 
       - name: Set your device IP address and clear Docker memory.
