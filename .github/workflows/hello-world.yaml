@@ -50,7 +50,7 @@ jobs:
 
       - name: get version client and server
         run: | 
-          echo($pwd)
+          echo ($pwd)
           docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version
 
       - name: Set your device IP address and clear Docker memory.
