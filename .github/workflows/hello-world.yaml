@@ -47,8 +47,11 @@ jobs:
           chmod +x tls_setup.sh
           echo $(pwd)
           sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
+
+      - name: get version client and server
+        run: | 
           docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version
-          
+
       - name: Set your device IP address and clear Docker memory.
         env: 
           DOCKER_PORT: 2376
