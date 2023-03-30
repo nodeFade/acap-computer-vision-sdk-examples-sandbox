@@ -74,6 +74,7 @@ jobs:
           echo $(pwd)
           cd /home/johanol/actions-runner-fadel/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/tls-certs
           echo $(pwd)
+          ls
           docker -v --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
         # export DOCKER_CERT_PATH="hello-world/tls-certs"
         # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
