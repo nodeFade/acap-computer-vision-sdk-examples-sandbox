@@ -60,5 +60,5 @@ echo "Step 9: Copy certificate to DUT"
 sudo apt-get install sshpass
 ls
 sshpass -v -p $PASS scp -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ca.pem server-cert.pem server-key.pem root@$HOST:/usr/local/packages/dockerdwrapper
-# sshpass -v -p $PASS ssh root@$HOST
+sshpass -v -p $PASS ssh root@$HOST
 # ls /usr/local/packages/dockerdwrapper
