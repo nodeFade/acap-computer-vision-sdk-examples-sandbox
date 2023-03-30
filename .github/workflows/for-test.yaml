@@ -7,7 +7,7 @@ on:
       - '.github/workflows/hello-world.yaml'
 jobs:  
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:   
       EXREPO: acap-computer-vision-examples-sandbox
       EXNAME: hello-world    
@@ -17,7 +17,7 @@ jobs:
         include:
           - arch: aarch64
           # - arch: armv7hf
-          
+
     steps: 
       - uses: actions/checkout@v2
       - name: Loop for spending time.
