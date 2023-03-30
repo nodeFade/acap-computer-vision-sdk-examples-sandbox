@@ -30,12 +30,12 @@ jobs:
 
       - name: Build the image.
         run: |
-          export ARCH=aarch64
-          export APP_NAME=hello-world
           echo $(pwd)
           cd ${{env.EXNAME}}
           echo $(pwd)
           docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+        # export ARCH=aarch64
+        # export APP_NAME=hello-world
 
       - name: create certificate for handshake.
         run: |
