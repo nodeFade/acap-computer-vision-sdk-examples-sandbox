@@ -21,12 +21,12 @@ jobs:
 
     steps: 
       - uses: actions/checkout@v2
-      - name: Loop for spending time.
-        run: | 
-          for i in {1..5}; do
-              sleep 1
-              echo $i
-          done
+      # - name: Loop for spending time.
+      #   run: | 
+      #     for i in {1..5}; do
+      #         sleep 1
+      #         echo $i
+      #     done
 
       - name: Build the image.
         run: |
