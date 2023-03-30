@@ -45,10 +45,8 @@ jobs:
 
       - name: Build the image.
         run: |
-          echo $(pwd)
           cd ${{env.EXNAME}}
-          echo $(pwd)
-          docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+          echo (docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .)
         # export ARCH=aarch64
         # export APP_NAME=hello-world
 
