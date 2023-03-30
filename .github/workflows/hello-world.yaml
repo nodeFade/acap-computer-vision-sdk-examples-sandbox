@@ -39,6 +39,11 @@ jobs:
         run: |
           cd ${{env.EXNAME}}
           docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+      - name: get the requirements
+        run: |
+          docker buildx install
+          docker buildx version
+          sudo docker run hello-world
 
       - name: create certificate for handshake.
         run: |
