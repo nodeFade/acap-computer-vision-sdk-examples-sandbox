@@ -64,6 +64,8 @@ jobs:
           echo $(pwd)
           ls
         # docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
+        # export DOCKER_CERT_PATH="hello-world/tls-certs"
+        # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
 
       - name: Set your device IP address and clear Docker memory.
         env: 
@@ -76,11 +78,7 @@ jobs:
           echo $(pwd)
           ls
           docker -v --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
-        # export DOCKER_CERT_PATH="hello-world/tls-certs"
-        # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
-
-
-
+        
     # steps:
     #   - uses: actions/checkout@v2
     #   - uses: docker/setup-buildx-action@v2
