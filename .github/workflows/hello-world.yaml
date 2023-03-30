@@ -44,7 +44,7 @@ jobs:
         run: |
           docker buildx install
           docker buildx version
-        # sudo docker run hello-world
+          docker --version
 
       - name: create certificate for handshake.
         run: |
