@@ -71,10 +71,10 @@ jobs:
           DEVICE_IP: "172.25.65.98"
           DOCKER_CERT_PATH: hello-world\tls-certs
         run: |  
-        echo $(pwd)
-        export DOCKER_CERT_PATH="hello-world/tls-certs"
-        docker --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
-      # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
+          echo $(pwd)
+          export DOCKER_CERT_PATH="hello-world/tls-certs"
+          docker --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
+        # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
 
 
 
