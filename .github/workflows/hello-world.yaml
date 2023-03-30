@@ -47,8 +47,6 @@ jobs:
           chmod +x tls_setup.sh
           echo $(pwd)
           sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
-        # TODO.. 
-        # i have to copy the 3 certs to the camera using scp but the problem is behind the access denied.
                    
       - name: Set your device IP address and clear Docker memory.
         env: 
@@ -56,8 +54,6 @@ jobs:
           DEVICE_IP: "172.25.65.98"
           DOCKER_CERT_PATH: hello-world\tls-certs
         run: |
-          echo "$DOCKER_PORT"
-          echo "$DEVICE_IP"
           echo $(pwd)
           export DOCKER_CERT_PATH="hello-world/tls-certs"
           docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
