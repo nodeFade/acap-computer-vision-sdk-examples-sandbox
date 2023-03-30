@@ -22,12 +22,12 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
 
-      - name: test to get architecture on another camera
-        env: 
-          DEVICE_IP: "172.25.65.98"
-          DEVICE_PASSWORD: 'pass'
-        run: |
-          ping 172.25.65.98 
+      # - name: test to get architecture on another camera
+      #   env: 
+      #     DEVICE_IP: "172.25.65.98"
+      #     DEVICE_PASSWORD: 'pass'
+      #   run: |
+      #     ping 172.25.65.98 
         # curl -s --anyauth -u "root:${env.DEVICE_PASSWORD}" "http://${env.DEVICE_IP}/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"
         # ssh root@${env.DEVICE_IP} 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
         # ok=$(curl -v -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
