@@ -47,7 +47,7 @@ jobs:
           chmod +x tls_setup.sh
           echo $(pwd)
           sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
-
+ 
       - name: get version client and server
         run: | 
           echo $(pwd)
