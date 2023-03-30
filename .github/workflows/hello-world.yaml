@@ -50,6 +50,7 @@ jobs:
 
       - name: get version client and server
         run: | 
+          cd /home/johanol/actions-runner-fadel/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/tls-certs
           echo ($pwd)
         # docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version
 
@@ -59,7 +60,7 @@ jobs:
           DEVICE_IP: "172.25.65.98"
           DOCKER_CERT_PATH: hello-world\tls-certs
         run: |
-          cd /home/johanol/actions-runner-fadel/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/tls-certs
+          
           echo $(pwd)
         # export DOCKER_CERT_PATH="hello-world/tls-certs"
         # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
