@@ -59,7 +59,7 @@ jobs:
           echo "$DOCKER_PORT"
           echo "$DEVICE_IP"
           echo $(pwd)
-          export DOCKER_CERT_PATH="hello-world\tls-certs"
+          export DOCKER_CERT_PATH="hello-world/tls-certs"
           docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
           
         # docker --tlsverify --host tcp://$DEVICE_IP:$DOCKER_PORT system prune --all --force
