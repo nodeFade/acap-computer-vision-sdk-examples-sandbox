@@ -15,7 +15,7 @@ jobs:
       WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
     strategy:
       matrix:
-        include: 
+        include:   
           - arch: aarch64
           # - arch: armv7hf
 
