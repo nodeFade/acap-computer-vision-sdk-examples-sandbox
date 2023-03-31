@@ -1,5 +1,4 @@
 name: CI AND PUSH 
-
 on:
   push:
     paths:
