@@ -1,27 +1,45 @@
-name: CI AND PUSH 
-on:
-  push:
-    branches:
-      - main
+name: Check Runner Access
+
+on: [push]
+
 jobs:
-  build:
-    runs-on: self-hosted 
-    env:   
-      EXREPO: acap-computer-vision-examples-sandbox
-      EXNAME: hello-world    
-      WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
-    strategy:
-      matrix:
-        include:   
-          - arch: aarch64
-          # - arch: armv7hf
- 
-    steps: 
-      - uses: actions/checkout@v2
-      - name: just loop
+  check_access:
+    runs-on: self-hosted
+    steps:
+      - name: Test Connection
         run: |
-          for i in {1..5}; do
-            sleep 1
-            echo $i
-          done
+          curl -v https://github.com/nodeFade/acap-computer-vision-sdk-examples-sandbox
+
+
+
+
+
+
+
+# name: CI AND PUSH 
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   build:
+#     runs-on: self-hosted 
+#     env:   
+#       EXREPO: acap-computer-vision-examples-sandbox
+#       EXNAME: hello-world    
+#       WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
+#     strategy:
+#       matrix:
+#         include:   
+#           - arch: aarch64
+#           # - arch: armv7hf
+ 
+#     steps: 
+#       - uses: actions/checkout@v2
+#       - name: just loop
+#         run: |
+#           for i in {1..5}; do
+#             sleep 1
+#             echo $i
+#           done
 
