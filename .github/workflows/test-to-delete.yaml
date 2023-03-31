@@ -20,7 +20,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: just loop
         run: |
-          for i in {1..5},do
-                slepp(1)  
-              return i 
+          for i in {1..5}; do
+            sleep 1
+            echo $i
+          done
 
