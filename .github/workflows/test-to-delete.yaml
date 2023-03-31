@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Test Connection
         run: |
-          curl -v https://github.com/nodeFade/acap-computer-vision-sdk-examples-sandbox
+          curl -v https://github.com/nodeFade
 
 
 
