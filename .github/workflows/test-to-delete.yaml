@@ -20,10 +20,9 @@ jobs:
 
     steps: 
       - uses: actions/checkout@v2
-      - name: test to get architecture on another camera
+      - name: just loop
         run: |
           for i in {1..5},do
                 slepp(1)
               return i 
 
-              
