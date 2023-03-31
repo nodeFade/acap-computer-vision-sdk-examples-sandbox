@@ -1,0 +1,29 @@
+name: CI AND PUSH 
+
+on:
+  push:
+    paths:
+      - 'hello-world/**'
+      - '!hello-world/README.md'
+      - '.github/workflows/hello-world.yaml'
+jobs:
+  build:
+    runs-on: self-hosted 
+    env:   
+      EXREPO: acap-computer-vision-examples-sandbox
+      EXNAME: hello-world    
+      WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
+    strategy:
+      matrix:
+        include:   
+          - arch: aarch64
+          # - arch: armv7hf
+
+    steps: 
+      - uses: actions/checkout@v2
+
+      - name: test to get architecture on another camera
+        run: |
+          for i in {1..5},do
+                slepp(1)
+              return i
