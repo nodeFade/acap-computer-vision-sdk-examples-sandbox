@@ -1,10 +1,6 @@
 name: CI AND PUSH 
 on:
-  push:
-    paths:
-      - 'hello-world/**'
-      - '!hello-world/README.md'
-      - '.github/workflows/hello-world.yaml'
+  push: [main]
 jobs:
   build:
     runs-on: self-hosted 
