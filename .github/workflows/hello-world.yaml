@@ -18,7 +18,7 @@ jobs:
         include:
           - arch: aarch64
           # - arch: armv7hf
-
+        
     steps: 
       - uses: actions/checkout@v2
 
@@ -34,7 +34,7 @@ jobs:
           echo ok=$(echo $ok | cut -d '"' -f 3)
         # curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"
         # ssh root@"pass" 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-      
+
       - name: Build the image.
         run: |
           cd ${{env.EXNAME}}
