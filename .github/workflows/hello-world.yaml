@@ -18,7 +18,7 @@ jobs:
         include:
           - arch: aarch64
           # - arch: armv7hf
-        
+
     steps: 
       - uses: actions/checkout@v2
 
@@ -26,6 +26,7 @@ jobs:
         env: 
           DEVICE_IP: "172.25.65.98"
           DEVICE_PASSWORD: 'pass'
+        shell: bash
         run: |
           ok=$(curl -v -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
           echo  "response from curl= $ok" 
