@@ -19,7 +19,7 @@ jobs:
           - arch: aarch64
           # - arch: armv7hf
 
-    steps: 
+    steps:   
       - uses: actions/checkout@v2
 
       - name: test to get architecture on another camera
