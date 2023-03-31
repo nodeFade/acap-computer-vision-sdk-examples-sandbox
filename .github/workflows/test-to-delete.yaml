@@ -1,42 +1,39 @@
-name: Check Runner Access
-
-on: [push]
-
+name: CI AND PUSH 
+on:
+  push:
+    branches:
+      - main
 jobs:
-  check_access:
-    runs-on: self-hosted
-    steps:
-      - name: Test Connection
-        run: |
-          curl -v https://github.com/nodeFade
-
-
-
-
-# name: CI AND PUSH 
-# on:
-#   push:
-#     branches:
-#       - main
-# jobs:
-#   build:
-#     runs-on: self-hosted 
-#     env:   
-#       EXREPO: acap-computer-vision-examples-sandbox
-#       EXNAME: hello-world    
-#       WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
-#     strategy:
-#       matrix:
-#         include:   
-#           - arch: aarch64
-#           # - arch: armv7hf
+  build:
+    runs-on: self-hosted 
+    env:   
+      EXREPO: acap-computer-vision-examples-sandbox
+      EXNAME: hello-world    
+      WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
+    strategy:
+      matrix:
+        include:   
+          - arch: aarch64
+          # - arch: armv7hf
  
-#     steps: 
-#       - uses: actions/checkout@v2
-#       - name: just loop
+    steps: 
+      - uses: actions/checkout@v2
+      - name: just loop
+        run: |
+          for i in {1..5}; do
+            sleep 1
+            echo $i
+          done
+
+# name: Check Runner Access
+
+# on: [push]
+
+# jobs:
+#   check_access:
+#     runs-on: self-hosted
+#     steps:
+#       - name: Test Connection
 #         run: |
-#           for i in {1..5}; do
-#             sleep 1
-#             echo $i
-#           done
+#           curl -v https://github.com/nodeFade
 
