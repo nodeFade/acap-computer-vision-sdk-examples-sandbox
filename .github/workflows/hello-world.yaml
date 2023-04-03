@@ -46,11 +46,12 @@ jobs:
           docker buildx install
           docker buildx version
           docker --version
+
       - name: installing daemon
         run: |
-          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox\acap-computer-vision-sdk-examples-sandbox\hello-world
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
           echo $(pwd)
-          docker run --rm axisecp/docker-acap:latest-${arch} "172.25.65.98" "pass" install
+          docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
          
       - name: create certificate for handshake.
         run: | 
