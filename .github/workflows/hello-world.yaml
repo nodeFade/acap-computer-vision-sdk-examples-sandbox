@@ -72,16 +72,7 @@ jobs:
   build-hello-world-app:
     runs-on: self-hosted
     needs: build
-    env:   
-      EXREPO: acap-computer-vision-examples-sandbox
-      EXNAME: hello-world    
-      WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
-      APP_NAME: hello-world
-    strategy:
-      matrix:
-        include:   
-          - arch: aarch64
-      
+    steps:
       - name: Build the image.
         run: |
           cd ${{env.EXNAME}}
