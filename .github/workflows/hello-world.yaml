@@ -80,7 +80,7 @@ jobs:
       - name: Build the image.
         run: |
           echo $(pwd)
-          cd /hello-world
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/
           echo $(pwd)
           docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
       
