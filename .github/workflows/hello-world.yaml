@@ -49,7 +49,6 @@ jobs:
 
       - name: installing daemon
         run: |
-          curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no"
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
           echo $(pwd)
           docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
@@ -66,12 +65,12 @@ jobs:
           echo $(pwd)
           sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
 
-      - name: waste time to run the daemon manually.
-        run: |
-          for i in {1..5}; do
-              sleep 1
-              echo $i
-          done  
+      # - name: waste time to run the daemon manually.
+      #   run: |
+      #     for i in {1..5}; do
+      #         sleep 1
+      #         echo $i
+      #     done  
 
       - name: get version client and server
         run: | 
