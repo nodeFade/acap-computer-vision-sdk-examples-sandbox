@@ -51,7 +51,7 @@ jobs:
         run: | 
           cd hello-world/tls-certs
           echo $(pwd)
-          chmod +x tls_setup.sh
+          chmod +x tls_setup.sh 
           echo $(pwd)
           sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
         # the 3 certs are available on the camera using manual observation with copying the original with new names to reserve them like ca2.pem instead of ca.pem
