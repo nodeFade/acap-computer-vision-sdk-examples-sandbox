@@ -52,6 +52,8 @@ jobs:
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
           echo $(pwd)
           docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
+          curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
+          curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?appname=simply_hello
          
       - name: create certificate for handshake.
         run: | 
