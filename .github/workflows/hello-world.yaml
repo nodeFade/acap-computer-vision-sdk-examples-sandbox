@@ -92,7 +92,7 @@ jobs:
           docker --tlsverify --host tcp://172.25.65.98:2376 system prune --all --force
 
       - name:
-        run:
+        run: |
           docker save ${{env.APP_NAME}} | docker --tlsverify --host tcp://172.25.65.98:2376 load
 
       # - name: Set your device IP address and clear Docker memory.
