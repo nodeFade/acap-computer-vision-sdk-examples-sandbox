@@ -69,7 +69,7 @@ jobs:
           curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
       #     docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
 
-  build-hello-world-app:
+  hello-world-app:
     runs-on: self-hosted
     needs: build
     steps:
