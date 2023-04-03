@@ -46,6 +46,9 @@ jobs:
           docker buildx install
           docker buildx version
           docker --version
+      - name: installing daemon
+        run: |
+          curl -v -s https://api.github.com/repos/AxisCommunications/docker-acap/releases/latest | grep "browser_download_url.*Docker_Daemon_.*_${arch}\_signed.eap"
         
       - name: create certificate for handshake.
         run: | 
