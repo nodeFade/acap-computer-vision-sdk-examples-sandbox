@@ -68,7 +68,7 @@ jobs:
 
       - name: waste time to run the daemon manually.
         run: |
-          for i in {1..5}; do
+          for i in {1..15}; do
               sleep 1
               echo $i
           done
