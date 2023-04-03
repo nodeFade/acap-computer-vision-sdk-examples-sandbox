@@ -70,30 +70,30 @@ jobs:
       #     docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
 
   build-hello-world-app:
+    runs-on: self-hosted
     needs: build
-      runs-on: self-hosted 
-      env:   
-        EXREPO: acap-computer-vision-examples-sandbox
-        EXNAME: hello-world    
-        WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
-        APP_NAME: hello-world
-      strategy:
-        matrix:
-          include:   
-            - arch: aarch64
-        
-        - name: Build the image.
-          run: |
-            cd ${{env.EXNAME}}
-            docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
-        
-        - name: Set your device IP address and clear Docker memory.
-          run: |
-            docker --tlsverify --host tcp://172.25.65.98:2376 system prune --all --force
+    env:   
+      EXREPO: acap-computer-vision-examples-sandbox
+      EXNAME: hello-world    
+      WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
+      APP_NAME: hello-world
+    strategy:
+      matrix:
+        include:   
+          - arch: aarch64
+      
+      - name: Build the image.
+        run: |
+          cd ${{env.EXNAME}}
+          docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
+      
+      - name: Set your device IP address and clear Docker memory.
+        run: |
+          docker --tlsverify --host tcp://172.25.65.98:2376 system prune --all --force
 
-        - name:
-          run:
-            docker save ${{env.APP_NAME}} | docker --tlsverify --host tcp://172.25.65.98:2376 load
+      - name:
+        run:
+          docker save ${{env.APP_NAME}} | docker --tlsverify --host tcp://172.25.65.98:2376 load
 
       # - name: Set your device IP address and clear Docker memory.
       #   env: 
