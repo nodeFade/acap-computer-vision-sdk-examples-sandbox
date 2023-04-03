@@ -80,7 +80,8 @@ jobs:
       - name: Build the image.
         run: |
           echo $(pwd)
-          cd ${{env.EXNAME}}
+          cd /hello-world
+          echo $(pwd)
           docker build --tag ${{env.EXNAME}} --build-arg ${{ matrix.arch }} .
       
       - name: Set your device IP address and clear Docker memory.
