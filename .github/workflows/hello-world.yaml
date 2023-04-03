@@ -1,6 +1,6 @@
 name: Build hello-world application
 
-on:
+on: 
   push: 
     paths:
       - 'hello-world/**'
