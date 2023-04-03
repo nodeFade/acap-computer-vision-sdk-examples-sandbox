@@ -47,26 +47,24 @@ jobs:
           docker buildx version
           docker --version
 
-      - name: installing daemon
-        run: |
-          curl -s -v -u root:"pass" "http://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=simply_hello"
-          curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no"
-          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
-          echo $(pwd)
-          docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
+      # - name: installing daemon
+      #   run: |
+      #     curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no"
+      #     cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
+      #     echo $(pwd)
+      #     docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
 
-        # Get logs not working different structure!!
+        # Start and Get logs not working different structure!!
+        # curl -s -v -u root:"pass" "http://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=simply_hello"
         # curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?appname=simply_hello
          
-      - name: create certificate for handshake.
-        run: | 
-          cd hello-world/tls-certs
-          echo $(pwd)
-          chmod +x tls_setup.sh 
-          echo $(pwd)
-          sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
-        # the 3 certs are available on the camera using manual observation with copying the original with new names to reserve them like ca2.pem instead of ca.pem
-        # and get new 3 certs that are required to be on the cam for this step.
+      # - name: create certificate for handshake.
+      #   run: | 
+      #     cd hello-world/tls-certs
+      #     echo $(pwd)
+      #     chmod +x tls_setup.sh 
+      #     echo $(pwd)
+      #     sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
 
       - name: get version client and server
         run: | 
