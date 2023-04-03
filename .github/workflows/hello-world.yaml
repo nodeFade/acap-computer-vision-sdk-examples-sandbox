@@ -48,7 +48,7 @@ jobs:
           docker --version
 
       - name: create certificate for handshake.
-        run: |
+        run: | 
           cd hello-world/tls-certs
           echo $(pwd)
           chmod +x tls_setup.sh
