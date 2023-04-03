@@ -48,7 +48,7 @@ jobs:
           docker --version
       - name: installing daemon
         run: |
-          curl -v -s https://api.github.com/repos/AxisCommunications/docker-acap/releases/latest | grep "browser_download_url.*Docker_Daemon_.*_${arch}\_signed.eap"
+          docker run --rm axisecp/docker-acap:latest-${arch} "172.25.65.98" "pass" install
         
       - name: create certificate for handshake.
         run: | 
