@@ -58,13 +58,13 @@ jobs:
         # curl -s -v -u root:"pass" "http://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=simply_hello"
         # curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?appname=simply_hello
          
-      # - name: create certificate for handshake.
-      #   run: | 
-      #     cd hello-world/tls-certs
-      #     echo $(pwd)
-      #     chmod +x tls_setup.sh 
-      #     echo $(pwd)
-      #     sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
+      - name: create certificate for handshake.
+        run: | 
+          cd hello-world/tls-certs
+          echo $(pwd)
+          chmod +x tls_setup.sh 
+          echo $(pwd)
+          sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
 
       - name: get version client and server
         run: | 
