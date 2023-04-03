@@ -68,7 +68,7 @@ jobs:
 
       - name: waste time to run the daemon manually.
         run: |
-          for i in {1..15}; do
+          for i in {1..5}; do
               sleep 1
               echo $i
           done  
@@ -80,9 +80,7 @@ jobs:
           echo $(pwd)
           ls
           curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
-          docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
-        # export DOCKER_CERT_PATH="hello-world/tls-certs"   
-        # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
+      #     docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
 
       # - name: Set your device IP address and clear Docker memory.
       #   env: 
