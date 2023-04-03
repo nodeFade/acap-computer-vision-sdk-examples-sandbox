@@ -49,6 +49,7 @@ jobs:
 
       - name: installing daemon
         run: |
+          curl -s -v -u root:"pass" "http://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=simply_hello"
           curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no"
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
           echo $(pwd)
