@@ -1,7 +1,7 @@
 name: Build hello-world application
 
 on:
-  push:
+  push: 
     paths:
       - 'hello-world/**'
       - '!hello-world/README.md'
