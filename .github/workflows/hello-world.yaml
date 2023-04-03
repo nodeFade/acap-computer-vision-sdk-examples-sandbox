@@ -52,7 +52,6 @@ jobs:
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
           echo $(pwd)
           docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
-          curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
 
         # Get logs not working different structure!!
         # curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?appname=simply_hello
@@ -73,6 +72,7 @@ jobs:
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/tls-certs
           echo $(pwd)
           ls
+          curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
           docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
         # export DOCKER_CERT_PATH="hello-world/tls-certs"   
         # docker -v --tlsverify -H=$DEVICE_IP:$DOCKER_PORT version
