@@ -1,8 +1,10 @@
 name: Build acap application
 on:
-  push:
-    branches: [ main ]
-    
+  push: 
+    paths:  
+      - 'acap/**'
+      - '.github/workflows/hello-world.yaml'
+
 jobs:
   build:
     runs-on: self-hosted 
