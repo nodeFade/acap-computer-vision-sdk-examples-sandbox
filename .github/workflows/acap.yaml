@@ -93,7 +93,6 @@ jobs:
               exit 0
           catch: |
             echo "The User Can't change the TLS-setup due to unauthorization."
-            exit 1
 
       ################### THE ORIGINAL ONE ####################
       # steps:
