@@ -55,6 +55,13 @@ jobs:
           echo $(pwd)
           sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
 
+      - name: move required files to required place.
+        run: |
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
+          cp ca.pem key.pem cert.pem ../../../../../
+          cd ../../../../../
+          mv ca.pem key.pem cert.pem ./.docker
+
       - name: get version client and server
         run: | 
           echo $(pwd)
