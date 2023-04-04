@@ -84,15 +84,10 @@ jobs:
 
       - name: test as user.
         run:
-          try: |
-            curl -v -s --anyauth -u user:"pass" \
-              "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=no"
-
+            curl -v -s --anyauth -u user:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=no"
             ssh user@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-              echo "The User authorized to change the TLS-setup"
-              exit 0
-          catch: |
-            echo "The User Can't change the TLS-setup due to unauthorization."
+          continue-on-error: true
+            
 
       ################### THE ORIGINAL ONE ####################
       # steps:
