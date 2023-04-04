@@ -82,7 +82,7 @@ jobs:
 
           ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
 
-        - name: test as user.
+      - name: test as user.
         uses: peter-evans/try-catch@v2
         with:
           try: |
