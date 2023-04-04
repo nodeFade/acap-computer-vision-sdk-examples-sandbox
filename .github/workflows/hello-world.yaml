@@ -30,7 +30,8 @@ jobs:
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
           echo $(pwd)
           docker build --tag hello-world --build-arg aarch64 .
-      
+          ls
+            
       - name: Set your device IP address and clear Docker memory.
         run: |
           docker --tlsverify --host tcp://172.25.65.98:2376 system prune --all --force
