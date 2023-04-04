@@ -49,7 +49,7 @@ jobs:
          
       - name: create certificate for handshake.
         run: | 
-          cd acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
           echo $(pwd)
           chmod +x tls_setup.sh 
           echo $(pwd)
