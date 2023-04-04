@@ -1,7 +1,7 @@
 name: Build hello-world application
 on: 
   push: 
-    paths:
+    paths:  
       - 'hello-world/**'
       - '!hello-world/README.md'
       - '.github/workflows/hello-world.yaml'
