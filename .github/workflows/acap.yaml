@@ -1,18 +1,14 @@
-name: Build hello-world application
-
-on: 
-  push: 
-    paths:
-      - 'hello-world/**'
-      - '!hello-world/README.md'
-      - '.github/workflows/hello-world.yaml'
+name: Build acap application
+on:
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: self-hosted 
     env:   
-      EXREPO: acap-computer-vision-examples-sandbox
-      EXNAME: hello-world    
-      WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
+      EXREPO: acap-computer-vision-examples-sandbox 
+      WORKDIR: acap-computer-vision-sdk-examples-sandbox
     strategy:
       matrix:
         include:   
@@ -21,7 +17,6 @@ jobs:
 
     steps:   
       - uses: actions/checkout@v2
-
       - name: test to get architecture on another camera
         env: 
           DEVICE_IP: "172.25.65.98"
@@ -44,7 +39,7 @@ jobs:
 
       - name: installing daemon
         run: |
-          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox
           echo $(pwd)
           docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
 
@@ -54,7 +49,7 @@ jobs:
          
       - name: create certificate for handshake.
         run: | 
-          cd hello-world/tls-certs
+          cd acap-computer-vision-sdk-examples-sandbox/tls-certs
           echo $(pwd)
           chmod +x tls_setup.sh 
           echo $(pwd)
@@ -63,34 +58,11 @@ jobs:
       - name: get version client and server
         run: | 
           echo $(pwd)
-          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/tls-certs
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
           echo $(pwd)
           ls
           curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
       #     docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
-
-  hello-world-app:
-    runs-on: self-hosted
-    needs: build
-    env:   
-      EXREPO: acap-computer-vision-examples-sandbox
-      EXNAME: hello-world    
-      WORKDIR: acap-computer-vision-sdk-examples-sandbox\hello-world
-    steps:
-      - name: Build the image.
-        run: |
-          echo $(pwd)
-          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/
-          echo $(pwd)
-          docker build --tag hello-world--build-arg aarch64 .
-      
-      - name: Set your device IP address and clear Docker memory.
-        run: |
-          docker --tlsverify --host tcp://172.25.65.98:2376 system prune --all --force
-
-      - name:
-        run: |
-          docker save ${{env.APP_NAME}} | docker --tlsverify --host tcp://172.25.65.98:2376 load
 
       # - name: Set your device IP address and clear Docker memory.
       #   env: 
