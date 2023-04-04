@@ -75,6 +75,12 @@ jobs:
       # TO RUN THIS COMMAND, MUST FIRST RUN THE DAEMON MANUALLY IN THE UI/INTERFACE AND FILL THE SETTINGS FOR TLS.
       # docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
 
+      - name: test as user.
+        run: |
+          curl -v -s --anyauth -u user:"pass" \
+          "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=no"
+
+          ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
 
       ################### THE ORIGINAL ONE ####################
       # steps:
