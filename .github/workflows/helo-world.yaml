@@ -1,5 +1,7 @@
 name: Build hello-world application
 on: 
+  pull_request:
+    types: [opened, synchronize]
   push: 
     paths:  
       - 'hello-world/**'
