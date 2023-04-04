@@ -1,19 +1,12 @@
 #!/bin/bash
 
-# ok=$(curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.70.46/axis-cgi/basicdeviceinfo.cgi)
-# echo  "response from curl= $ok" 
-# ok=${ok#*Architecture}
-# echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
-# echo ok=$(echo $ok | cut -d '"' -f 3)
 
-# ok=$(curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
-# echo  "response from curl= $ok" 
-# ok=${ok#*Architecture}
-# echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
-# echo ok=$(echo $ok | cut -d '"' -f 3)
+# for i in {1..5}; do
+#     sleep 1
+#     echo $i
+# done
 
 
-for i in {1..5}; do
-    sleep 1
-    echo $i
-done
+curl -v -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"
+ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
+curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
