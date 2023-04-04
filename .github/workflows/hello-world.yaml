@@ -18,16 +18,18 @@ jobs:
     strategy:
       matrix:
         include:   
-          - arch: aarch64
-          # - arch: armv7hf
+          - arch: aarch64   # for arm64
+          # - arch: armv7hf   # for arm32
     steps:   
       - uses: actions/checkout@v2
       - name: Build the image.
+        env:
+          arch: "aarch64"
         run: |
           echo $(pwd)
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
           echo $(pwd)
-          docker build --tag hello-world--build-arg aarch64 .
+          docker build --tag hello-world --build-arg aarch64 .
       
       - name: Set your device IP address and clear Docker memory.
         run: |
