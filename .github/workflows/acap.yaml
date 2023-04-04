@@ -86,7 +86,7 @@ jobs:
         run:
             curl -v -s --anyauth -u user:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=no"
             ssh user@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-          continue-on-error: true
+        continue-on-error: true
             
 
       ################### THE ORIGINAL ONE ####################
