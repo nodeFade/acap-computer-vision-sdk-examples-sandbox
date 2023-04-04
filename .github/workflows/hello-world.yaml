@@ -23,7 +23,7 @@ jobs:
     steps:   
       - uses: actions/checkout@v2
       - name: Build the image.
-        env:
+        env:  
           arch: "aarch64"
         run: |
           echo $(pwd)
