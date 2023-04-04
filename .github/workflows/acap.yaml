@@ -1,8 +1,8 @@
 name: Build acap application
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+    
 jobs:
   build:
     runs-on: self-hosted 
