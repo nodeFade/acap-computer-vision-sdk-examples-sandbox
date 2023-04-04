@@ -42,7 +42,7 @@ jobs:
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox
           echo $(pwd)
           docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
-
+        
         # Start and Get logs not working different structure!!
         # curl -s -v -u root:"pass" "http://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=simply_hello"
         # curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?appname=simply_hello
