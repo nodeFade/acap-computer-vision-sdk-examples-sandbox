@@ -3,8 +3,8 @@ on:
   push: 
     paths:  
       - 'acap/**'
-      - '.github/workflows/hello-world.yaml'
-   
+      - '.github/workflows/acap.yaml'
+
 jobs:
   build:
     runs-on: self-hosted 
