@@ -1,12 +1,13 @@
 name: Build hello-world application
 on: 
-  pull_request:
-    types: [opened, synchronize]
   push: 
     paths:  
       - 'hello-world/**'
       - '!hello-world/README.md'
       - '.github/workflows/hello-world.yaml'
+  pull_request:
+    types: [opened, synchronize]
+    
 jobs:  
   build:
     runs-on: self-hosted 
