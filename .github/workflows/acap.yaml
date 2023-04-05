@@ -94,11 +94,18 @@ jobs:
             
       - name: Install Anchore CLI
         run: |
-          sudo apt-get update && sudo apt-get install -y curl tar gzip
-          curl -s https://anchore.com/download/latest/cli | sudo tar zxf -
+          apt-get update
+          apt-get install python-pip
+          pip install anchorecli
           sudo mv anchore-cli /usr/local/bin/
           anchore-cli --version
         # chmod +x anchore-cli
+
+      - name: Scan image
+        uses: anchore/scan-action@v3
+        with:
+          image: "axisecp/docker-acap:latest-aarch64"
+          fail-build: false
 
       - name: Add image to Anchore
         run: |
