@@ -116,10 +116,12 @@ jobs:
 
       - name: Start Anchore Engine
         run: |
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
+          echo $(pwd)
           docker-compose up -d
           docker-compose logs -f anchore-engine &
           ./docker-entrypoint.sh
-          
+
       - name: Add image to Anchore
         run: |
           docker pull hello-world

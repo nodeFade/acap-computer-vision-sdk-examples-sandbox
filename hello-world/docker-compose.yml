@@ -3,34 +3,3 @@ version: '3.3'
 services:
   hello-world-app:
     image: ${APP_NAME}
-
-  anchore-engine:
-    image: docker.io/anchore/anchore-engine:v0.10.0
-    container_name: anchore-engine
-    environment:
-      ANCHORE_DB_HOST: db
-      ANCHORE_DB_NAME: anchore
-      ANCHORE_DB_USER: postgres
-      ANCHORE_DB_PASSWORD: postgres
-      ANCHORE_ADMIN_PASSWORD: anchore
-      ANCHORE_SERVICE_HOSTNAME: anchore-engine
-      ANCHORE_CLI_URL: http://localhost:8228/v1/
-    ports:
-      - 8228:8228
-      - 8338:8338
-    depends_on:
-      - db
-    restart: unless-stopped
-
-  db:
-    image: docker.io/postgres:9.6-alpine
-    container_name: anchore-db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: anchore
-    volumes:
-      - anchore-db:/var/lib/postgresql/data
-
-volumes:
-  anchore-db:
