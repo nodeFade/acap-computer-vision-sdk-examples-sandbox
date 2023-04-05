@@ -104,19 +104,14 @@ jobs:
         # chmod +x anchore-cli
         # sudo mv anchore-cli /usr/local/bin/
 
-      - name: Build the image.
-        env:  
-          arch: "aarch64"
+      - name: use anchore to scan the image.
         run: |
-          echo $(pwd)
-          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
-          echo $(pwd)
-          docker build --tag hello-world --build-arg aarch64 .
-          ls app/
+          docker pull anchore/grype:v0.17
+            
 
       - name: Start Anchore Engine
         run: |
-          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/hello-world/anchore
           echo $(pwd)
           docker-compose up -d
           docker-compose logs -f anchore-engine &
@@ -129,7 +124,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl python3-pip libssl-dev libffi-dev python3-dev
           sudo pip3 install docker-compose
-
+        # axisecp/acap-computer-vision-sdk:1.7-aarch64
       
       - name: Wait for image analysis
         run: |
