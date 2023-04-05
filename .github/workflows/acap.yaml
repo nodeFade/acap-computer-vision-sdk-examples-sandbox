@@ -82,6 +82,8 @@ jobs:
             curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
         continue-on-error: true
             
-
+      - name: if user and operator can ssh the camera.
+        run: |
+          sshpass "pass" ssh -v user@172.25.56.89
 
            
