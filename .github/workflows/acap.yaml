@@ -78,7 +78,7 @@ jobs:
       - name: if user and operator can ssh the camera.
         run: |
           ssh -v user@172.25.65.98
-          ssh -v operator@172.25.65.98
+        # ssh -v operator@172.25.65.98
         continue-on-error: true
 
       - name: test as user.
