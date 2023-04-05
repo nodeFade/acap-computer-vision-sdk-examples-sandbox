@@ -103,6 +103,7 @@ jobs:
         # it depends on the computer that are running this workflow to use those two commands:
         # chmod +x anchore-cli
         # sudo mv anchore-cli /usr/local/bin/
+
       - name: Build the image.
         env:  
           arch: "aarch64"
@@ -113,15 +114,20 @@ jobs:
           docker build --tag hello-world --build-arg aarch64 .
           ls app/
 
-      - name: Scan image
-        uses: anchore/scan-action@v3
-        with:
-          image: "hello-world"
-          fail-build: false
-
+      - name: Start Anchore Engine
+        run: |
+          docker-compose up -d
+          docker-compose logs -f anchore-engine &
+          ./docker-entrypoint.sh
+          
       - name: Add image to Anchore
         run: |
+          docker pull hello-world
           anchore-cli image add hello-world
+          sudo apt-get update
+          sudo apt-get install -y curl python3-pip libssl-dev libffi-dev python3-dev
+          sudo pip3 install docker-compose
+
       
       - name: Wait for image analysis
         run: |
