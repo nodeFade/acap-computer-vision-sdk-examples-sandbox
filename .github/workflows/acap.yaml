@@ -94,9 +94,10 @@ jobs:
             
       - name: Install Anchore CLI
         run: |
-          wget https://github.com/anchore/anchore-cli/releases/download/v0.13.2/anchore-cli-linux-amd64 && \
-          chmod +x anchore-cli-linux-amd64 && \
-          sudo mv anchore-cli-linux-amd64 /usr/local/bin/anchore-cli
+          sudo apt-get update && sudo apt-get install -y curl jq
+          curl -s "https://api.github.com/repos/anchore/anchore-cli/releases/latest" | jq -r '.assets[] | select(.name | endswith("_linux_amd64.tar.gz")).browser_download_url' | xargs curl -sL | tar xz
+          chmod +x anchore-cli
+          sudo mv anchore-cli /usr/local/bin/
 
       - name: Add image to Anchore
         run: |
