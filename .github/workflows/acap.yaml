@@ -94,6 +94,7 @@ jobs:
             
       - name: Install Anchore CLI
         run: |
+          echo $(pwd)
           apt-get update
           apt-get install python-pip
           pip install anchorecli
