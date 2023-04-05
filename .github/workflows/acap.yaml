@@ -84,6 +84,6 @@ jobs:
             
       - name: if user and operator can ssh the camera.
         run: |
-          sshpass "pass" ssh -v user@172.25.56.89
-
+          ssh -v user@172.25.56.89 <<< "pass"
+        # continue-on-error: true
            
