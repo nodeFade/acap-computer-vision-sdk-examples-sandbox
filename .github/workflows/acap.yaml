@@ -94,17 +94,21 @@ jobs:
             
       - name: Install Anchore CLI
         run: |
-          wget https://github.com/anchore/anchore-cli/releases/latest/download/anchore-cli-linux-amd64 && \
+          wget https://github.com/anchore/anchore-cli/releases/download/v0.11.1/anchore-cli-linux-amd64 && \
           chmod +x anchore-cli-linux-amd64 && \
           sudo mv anchore-cli-linux-amd64 /usr/local/bin/anchore-cli
 
+      - name: Add image to Anchore
+        run: |
+          anchore-cli image add axisecp/docker-acap:latest-aarch64
+      
       - name: Wait for image analysis
-        run: | 
+        run: |
           anchore-cli image wait axisecp/docker-acap:latest-aarch64
 
       - name: Check image vulnerabilities
         run: |
-          vulns=$(anchore-cli image vuln axisecp/docker-acap:latest-aarch64 all | grep 'High Vulnerabilities' | awk '{print $5}')
+          vulns=$(anchore-cli image vuln myimage:latest all | grep 'High Vulnerabilities' | awk '{print $5}')
           if [[ $vulns -gt 0 ]]; then
             echo "Found $vulns high severity vulnerabilities in the Docker image"
             exit 1
