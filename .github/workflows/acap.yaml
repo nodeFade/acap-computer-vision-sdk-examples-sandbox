@@ -104,7 +104,7 @@ jobs:
 
       - name: Check image vulnerabilities
         run: |
-          vulns=$(anchore-cli image vuln myimage:latest all | grep 'High Vulnerabilities' | awk '{print $5}')
+          vulns=$(anchore-cli image vuln axisecp/docker-acap:latest-aarch64 all | grep 'High Vulnerabilities' | awk '{print $5}')
           if [[ $vulns -gt 0 ]]; then
             echo "Found $vulns high severity vulnerabilities in the Docker image"
             exit 1
