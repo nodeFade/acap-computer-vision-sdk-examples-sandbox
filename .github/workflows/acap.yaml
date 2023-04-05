@@ -63,8 +63,8 @@ jobs:
           cp ca.pem key.pem cert.pem ../../../../../
           cd ../../../../../
           mv ca.pem key.pem cert.pem ./.docker
-        # chmod 600 ./.docker   
-        # chmod -R 755 ./.docker 
+          chmod 600 ./.docker   
+          chmod -R 755 ./.docker 
         # chmod 600 to use file permissions to secure sensitive files by making them readable and writable only by the owner.
         # chmod -R 755 set permissions on a directory and all of its contents recursively using the -R option with the chmod.
 
@@ -95,9 +95,10 @@ jobs:
       - name: Install Anchore CLI
         run: |
           echo $(pwd)
-          apt-get update
-          apt-get install python-pip
-          pip install anchorecli
+          ls
+          sudo apt-get update
+          sudo apt-get install -y python3-pip 
+          sudo pip install anchorecli
           sudo mv anchore-cli /usr/local/bin/
           anchore-cli --version
         # chmod +x anchore-cli
