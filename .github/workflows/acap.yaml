@@ -110,7 +110,7 @@ jobs:
 
       - name: UC2:8 Set the rights of daemon.json to only be writable by root.
         run: |
-          sudo apt-get update && export PATH=$PATH:/usr/bin/git &&sudo apt-get install -y git
+          sudo apt-get update && export PATH=$PATH:/usr/bin/git && sudo apt-get install -y git
           sshpass -p "pass" ssh root@172.25.65.98 'cd /usr/local/packages/dockerdwrapper/localdata/ && git pull origin main'
           echo $(pwd)
           chown root:root /usr/local/packages/dockerdwrapper/localdata/daemon.json
