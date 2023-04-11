@@ -118,7 +118,7 @@ jobs:
           echo $PATH
           sudo apt-get update && sudo apt-get install -y git && export PATH=$PATH:/usr/bin/git && git --version && sudo apt -y autoremove
           echo $PATH
-          sshpass -p "pass" ssh root@172.25.65.98 'cd /usr/local/packages/dockerdwrapper/localdata/ && chown root:root /usr/local/packages/dockerdwrapper/localdata/daemon.json && chmod 600 /usr/local/packages/dockerdwrapper/localdata/daemon.json'
+          sshpass -p "pass" ssh root@172.25.65.98 'cd /usr/local/packages/dockerdwrapper/localdata/ && chown root:root /usr/local/packages/dockerdwrapper/localdata/daemon.json && chmod 600 /usr/local/packages/dockerdwrapper/localdata/daemon.json && ls -la'
           git pull origin main
         # echo $(pwd)
         # ls
