@@ -109,10 +109,10 @@ jobs:
           docker image inspect --format='{{.RepoDigests}}' my-image-axisecp 
 
       - name: UC2:8 Set the rights of daemon.json to only be writable by root.
-        # get the path ( you see Local machine path)
-        # add th git to the machine to cover git in the path.
-        # update apt-git, add git to github workflow runner path, get version to verify and then autoremove un-wanted packages.
-        # ssh with pass and user to the camera and reach destination, plus change daemon file to 600 permission.
+          # get the path ( you see Local machine path)
+          # add th git to the machine to cover git in the path.
+          # update apt-git, add git to github workflow runner path, get version to verify and then autoremove un-wanted packages.
+          # ssh with pass and user to the camera and reach destination, plus change daemon file to 600 permission.
         run: |
           echo $(pwd)
           echo $PATH
@@ -120,10 +120,8 @@ jobs:
           echo $PATH
           sshpass -p "pass" ssh root@172.25.65.98 'cd /usr/local/packages/dockerdwrapper/localdata/ && chown root:root /usr/local/packages/dockerdwrapper/localdata/daemon.json && chmod 600 /usr/local/packages/dockerdwrapper/localdata/daemon.json && ls -la'
           git pull origin main
-        # echo $(pwd)
-        # ls
-        # chown root:root /usr/local/packages/dockerdwrapper/localdata/daemon.json
-        # chmod 600 /usr/local/packages/dockerdwrapper/localdata/daemon.json
+        
+      
 
 
         
