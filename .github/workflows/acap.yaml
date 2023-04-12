@@ -122,12 +122,12 @@ jobs:
           git pull origin main
         
       - name: UC3:9 Investigate how protected we are from local users accessing the dockerd socket.
+          # with permissions set to 660. This means that only root and members of the docker group have read and write access to the socket file.
+          # These commands ensure that only root and users belonging to the docker group can interact with the socket on the local machine. (if not granted in first step up)
         run: |
           echo $(pwd)
           ls -l /var/run/docker.sock
-        # with permissions set to 660. This means that only root and members of the docker group have read and write access to the socket file.
           getent group docker
-        # These commands ensure that only root and users belonging to the docker group can interact with the socket on the local machine. (if not granted in first step up)
           sudo chown root:docker /var/run/docker.sock
           sudo chmod g+w /var/run/docker.sock
 
