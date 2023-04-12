@@ -57,7 +57,7 @@ jobs:
           echo $(pwd)
           sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
 
-      - name: move required files to required place.
+      - name: move the required files to required place.
         run: |
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
           cp ca.pem key.pem cert.pem ../../../../../
@@ -121,7 +121,14 @@ jobs:
           sshpass -p "pass" ssh root@172.25.65.98 'cd /usr/local/packages/dockerdwrapper/localdata/ && chown root:root /usr/local/packages/dockerdwrapper/localdata/daemon.json && chmod 600 /usr/local/packages/dockerdwrapper/localdata/daemon.json && ls -la'
           git pull origin main
         
-      
-
+      - name: UC3:9 Investigate how protected we are from local users accessing the dockerd socket.
+        run: |
+          echo $(pwd)
+          ls -l /var/run/docker.sock
+        # with permissions set to 660. This means that only root and members of the docker group have read and write access to the socket file.
+          getent group docker
+        # These commands ensure that only root and users belonging to the docker group can interact with the socket on the local machine. (if not granted in first step up)
+          sudo chown root:docker /var/run/docker.sock
+          sudo chmod g+w /var/run/docker.sock
 
         
