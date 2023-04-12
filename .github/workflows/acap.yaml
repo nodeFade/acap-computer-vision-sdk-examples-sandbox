@@ -125,10 +125,12 @@ jobs:
           # with permissions set to 660. This means that only root and members of the docker group have read and write access to the socket file.
           # These commands ensure that only root and users belonging to the docker group can interact with the socket on the local machine. (if not granted in first step up)
         run: |
+          cd /
           echo $(pwd)
-          ls -l /var/run/docker.sock
-          getent group docker
           sudo chown root:docker /var/run/docker.sock
           sudo chmod g+w /var/run/docker.sock
+          ls -l /var/run/docker.sock
+          getent group docker
+          
 
         
