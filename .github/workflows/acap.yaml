@@ -38,6 +38,7 @@ jobs:
           docker buildx install
           docker buildx version
           docker --version
+
       - name: verify root can remove daomen if installed.
         run: |
           curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=remove&package=dockerdwrapper"
@@ -48,10 +49,7 @@ jobs:
           echo $(pwd)
           sshpass -p "pass" ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
           docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
-        
-        # Start and Get logs not working different structure!!
-        # curl -s -v -u root:"pass" "http://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=simply_hello"
-        # curl -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?appname=simply_hello
+
          
       - name: create certificate for handshake.
         run: | 
@@ -92,7 +90,8 @@ jobs:
       - name: configure the camera as root
         run: |
             curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper"
-            curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"           
+            curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"     
+          # curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes&root.dockerdwrapper.SDCardSupport=yes&root.dockerdwrapper.IPCSocket=no"    
           # curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
         continue-on-error: true
 

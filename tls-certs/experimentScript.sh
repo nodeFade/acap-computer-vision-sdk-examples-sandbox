@@ -14,3 +14,4 @@ curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: applicati
 # curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no"
 # curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.SDCardSupport=yes"
 # curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.IPCSocket=yes"
+# curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes&root.dockerdwrapper.SDCardSupport=yes&root.dockerdwrapper.IPCSocket=no"
