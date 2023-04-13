@@ -9,8 +9,8 @@
 # alias "images"="docker images -a"
 # image: axisecp/acap-computer-vision-sdk:latest-aarch64-runtime
 
-docker images -a
-docker image inspect --format='{{.RepoDigests}}' axisecp/acap-computer-vision-sdk:latest-aarch64-runtime
-docker save axisecp/acap-computer-vision-sdk:latest-aarch64-runtime -o  axisecp/acap-computer-vision-sdk:latest-aarch64-runtime.tar
-sha256sum axisecp/acap-computer-vision-sdk:latest-aarch64-runtime.tar
-docker rmi axisecp/acap-computer-vision-sdk:latest-aarch64-runtime.tar
+curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper"
+curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=update&root.dockerdwrapper.UseTLS=no&package=dockerdwrapper"
+# curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no"
+# curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.SDCardSupport=yes"
+# curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.IPCSocket=yes"

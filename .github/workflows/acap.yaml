@@ -38,6 +38,9 @@ jobs:
           docker buildx install
           docker buildx version
           docker --version
+      - name: verify root can remove daomen if installed.
+        run: |
+          curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=remove&package=dockerdwrapper"
 
       - name: installing daemon
         run: |
@@ -76,7 +79,7 @@ jobs:
           ls
           curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
 
-      # TO RUN THIS COMMAND, MUST FIRST RUN THE DAEMON MANUALLY IN THE UI/INTERFACE AND FILL THE SETTINGS FOR TLS.
+      # TO RUN THIS COMMAND, MUST FIRST RUN THE DAEMON AND FILL THE SETTINGS FOR TLS.
       # docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
 
       - name: if user and operator can ssh the camera.
@@ -85,11 +88,12 @@ jobs:
           sshpass -p "pass" ssh -v operator@172.25.65.98
         continue-on-error: true
 
-      - name: test as user if can disable TLS.
+      - name: configure the camera from root
         run: |
-            curl -v -s --anyauth -u user:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=no" 
-            ssh user@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-            curl -v -s --anyauth -u user:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
+            curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper"
+            curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
+            ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
+            curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
         continue-on-error: true
 
       - name: UC2:3 use anchore to scan the image.
