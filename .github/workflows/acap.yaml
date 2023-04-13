@@ -85,12 +85,12 @@ jobs:
           sshpass -p "pass" ssh -v operator@172.25.65.98
         continue-on-error: true
 
-      # - name: test as user.
-      #   run: |
-      #       curl -v -s --anyauth -u user:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=no" 
-      #       ssh user@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-      #       curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
-      #   continue-on-error: true
+      - name: test as user if can disable TLS.
+        run: |
+            curl -v -s --anyauth -u user:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=no" 
+            ssh user@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
+            curl -v -s --anyauth -u user:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
+        continue-on-error: true
 
       - name: UC2:3 use anchore to scan the image.
           # Pull anchore image
