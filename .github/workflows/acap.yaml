@@ -79,11 +79,11 @@ jobs:
       # TO RUN THIS COMMAND, MUST FIRST RUN THE DAEMON MANUALLY IN THE UI/INTERFACE AND FILL THE SETTINGS FOR TLS.
       # docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
 
-      # - name: if user and operator can ssh the camera.
-      #   run: |
-      #     ssh -v user@172.25.65.98  <<< "pass" 
-      #     ssh -v operator@172.25.65.98 <<< "pass" 
-      #   continue-on-error: true
+      - name: if user and operator can ssh the camera.
+        run: |
+          ssh -v user@172.25.65.98  <<< "pass" 
+          ssh -v operator@172.25.65.98 <<< "pass" 
+        continue-on-error: true
 
       # - name: test as user.
       #   run: |
