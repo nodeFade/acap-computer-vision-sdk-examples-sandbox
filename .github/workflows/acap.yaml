@@ -29,9 +29,7 @@ jobs:
           ok=${ok#*Architecture}
           echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
           echo ok=$(echo $ok | cut -d '"' -f 3)
-        # curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"
-        # ssh root@"pass" 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-          
+
       - name: get the requirements
         run: |
           echo $(pwd)
