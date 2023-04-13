@@ -46,6 +46,7 @@ jobs:
         run: |
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox
           echo $(pwd)
+          sshpass -p "pass" ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
           docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
         
         # Start and Get logs not working different structure!!
@@ -88,12 +89,11 @@ jobs:
           sshpass -p "pass" ssh -v operator@172.25.65.98
         continue-on-error: true
 
-      - name: configure the camera from root
+      - name: configure the camera as root
         run: |
             curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper"
-            curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes" 
-            ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-            curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
+            curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"           
+          # curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
         continue-on-error: true
 
       - name: UC2:3 use anchore to scan the image.
