@@ -91,7 +91,7 @@ jobs:
         run: |
             curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper"
             curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"     
-          # curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes&root.dockerdwrapper.SDCardSupport=yes&root.dockerdwrapper.IPCSocket=no"    
+            curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes&root.dockerdwrapper.SDCardSupport=yes&root.dockerdwrapper.IPCSocket=no"    
           # curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
         continue-on-error: true
 
