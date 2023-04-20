@@ -1,0 +1,23 @@
+name: Build acap application
+on:
+  push: 
+    paths:  
+      - 'acap/**'
+      - '.github/workflows/acap.yaml'
+
+jobs:
+  build:
+    runs-on: self-hosted
+    env:   
+      EXREPO: acap-computer-vision-examples-sandbox 
+      WORKDIR: acap-computer-vision-sdk-examples-sandbox
+    strategy:
+      matrix:
+        include:   
+          - arch: aarch64
+          # - arch: armv7hf
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: test the name
+        run: |

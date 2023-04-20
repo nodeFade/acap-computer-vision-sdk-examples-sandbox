@@ -21,10 +21,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: test to get architecture on another camera
         env: 
-          DEVICE_IP: "172.25.65.98"
+          DEVICE_IP: "<device IP>"
           DEVICE_PASSWORD: 'pass'
         run: |
-          ok=$(curl -v -s --noproxy '*' --anyauth -u root:"pass" -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://172.25.65.98/axis-cgi/basicdeviceinfo.cgi)
+          ok=$(curl -v -s --noproxy '*' --anyauth -u <device username: device password> -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://<device IP>/axis-cgi/basicdeviceinfo.cgi)
           echo  "response from curl= $ok" 
           ok=${ok#*Architecture}
           echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
@@ -45,8 +45,8 @@ jobs:
         run: |
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox
           echo $(pwd)
-          sshpass -p "pass" ssh root@172.25.65.98 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-          docker run --rm axisecp/docker-acap:latest-aarch64 172.25.65.98 pass install
+          sshpass -p "<device password>" ssh <device username>@<device IP> 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
+          docker run --rm axisecp/docker-acap:latest-aarch64 <device IP> <device password> install
       
       - name: create certificate for handshake.
         run: | 
@@ -54,7 +54,7 @@ jobs:
           echo $(pwd)
           chmod +x tls_setup.sh 
           echo $(pwd)
-          sh -v tls_setup.sh 172.25.65.98 dockerdwrapper
+          sh -v tls_setup.sh <device IP> dockerdwrapper
 
       - name: move the required files to required place.
         run: |
@@ -73,23 +73,23 @@ jobs:
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
           echo $(pwd)
           ls
-          curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
+          curl -s --anyauth -u <device username: device password> "http://<device IP>/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"
 
       # TO RUN THIS COMMAND, MUST FIRST RUN THE DAEMON AND FILL THE SETTINGS FOR TLS.
       # docker -v --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=172.25.65.98:2376 version 
 
       - name: if user and operator can ssh the camera.
         run: |
-          sshpass -p "pass" ssh -v user@172.25.65.98
-          sshpass -p "pass" ssh -v operator@172.25.65.98
+          sshpass -p "pass" ssh -v user@<device IP>
+          sshpass -p "pass" ssh -v operator@<device IP>
         continue-on-error: true
 
       - name: configure the camera as root
         run: |
-            curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper"
-            curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"     
-            curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes&root.dockerdwrapper.SDCardSupport=yes&root.dockerdwrapper.IPCSocket=no"    
-          # curl -v -s --anyauth -u root:"pass" -k --header "Content-Type:application/json" http://172.25.65.98/axis-cgi/admin/systemlog.cgi?
+            curl --noproxy '*' -k --anyauth -u <device username: device password> --header "Content-Type: application/json"  "https://<device IP>/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper"
+            curl -s --anyauth -u <device username: device password> "http://<device IP>/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"     
+            curl -s --anyauth -u <device username: device password> "http://<device IP>/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes&root.dockerdwrapper.SDCardSupport=yes&root.dockerdwrapper.IPCSocket=no"    
+          # curl -v -s --anyauth -u <device username: device password> -k --header "Content-Type:application/json" http://<device IP>/axis-cgi/admin/systemlog.cgi?
         continue-on-error: true
 
       - name: UC2:3 use anchore to scan the image.
@@ -118,7 +118,7 @@ jobs:
         run: |
           echo $(pwd)
           echo $PATH
-          sshpass -p "pass" ssh root@172.25.65.98 'cd /usr/local/packages/dockerdwrapper/localdata/ && chown root:root /usr/local/packages/dockerdwrapper/localdata/daemon.json && chmod 600 /usr/local/packages/dockerdwrapper/localdata/daemon.json && ls -la'
+          sshpass -p <device password> ssh <device username>@<device IP> 'cd /usr/local/packages/dockerdwrapper/localdata/ && chown root:root /usr/local/packages/dockerdwrapper/localdata/daemon.json && chmod 600 /usr/local/packages/dockerdwrapper/localdata/daemon.json && ls -la'
         
       - name: UC3:9 Investigate how protected we are from local users accessing the dockerd socket.
           # with permissions set to 660. This means that only root and members of the docker group have read and write access to the socket file.
