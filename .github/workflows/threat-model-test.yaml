@@ -1,4 +1,4 @@
-name: Build acap application
+name: threat-modeling
 on:
   push: 
     paths:  
@@ -19,5 +19,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: test the name
+      - name: test the device as an attacker
         run: |
+          device-threat-model.py ${{secrets.campassword}} ${{secrets.url_base}}
