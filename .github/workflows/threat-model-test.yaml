@@ -21,4 +21,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: test the device as an attacker
         run: |
-          device-threat-model.py ${{secrets.campassword}} ${{secrets.url_base}}
+          authentication.py ${{secrets.campassword}} ${{secrets.url_base}}
