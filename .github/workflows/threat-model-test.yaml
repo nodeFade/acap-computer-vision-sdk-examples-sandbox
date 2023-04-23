@@ -26,4 +26,4 @@ jobs:
           cd ${WORKDIR}
           cd WORKDIR
           echo ${pwd}
-          authentication.py ${{secrets.campassword}} ${{secrets.cam-username}} ${{secrets.url_base}}
+          authentication.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
