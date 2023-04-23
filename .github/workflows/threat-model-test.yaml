@@ -20,5 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: test the device as an attacker
+        env:
+          WORKDIR: acap-computer-vision-sdk-examples-sandbox
         run: |
+          cd ${WORKDIR}
+          cd WORKDIR
+          echo ${pwd}
           authentication.py ${{secrets.campassword}} ${{secrets.url_base}}
