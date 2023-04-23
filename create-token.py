@@ -1,6 +1,25 @@
 import requests
+import os
 
-def get_token(username, password, url_base):
+password=$1
+username=$2
+url_base=$3
+
+import os
+
+class Authentication:
+    def __init__(self, username, password, url_base):
+        self.username = username
+        self.password = password
+        self.url_base = url_base
+        
+# def get_auth_token(self):
+        # your authentication code here
+        # returns the auth token
+#         return "your_auth_token_here"
+    
+# def get_token(username, password, url_base):
+def get_auth_token(self):
     # Define the authentication endpoint URL
     auth_url = f"{url_base}/api/auth/token"
 
@@ -26,3 +45,4 @@ def get_token(username, password, url_base):
     # If the request failed, raise an exception
     else:
         raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
+    
