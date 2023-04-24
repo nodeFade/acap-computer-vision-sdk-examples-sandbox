@@ -32,11 +32,15 @@ jobs:
           pip install requests
           pip list
 
-      - name: test the device as an attacker
-        env:
-          WORKDIR: acap-computer-vision-sdk-examples-sandbox
+      # - name: test the device as an attacker
+      #   env:
+      #     WORKDIR: acap-computer-vision-sdk-examples-sandbox
+      #   run: |
+      #     echo ${pwd}
+      #     ls
+      #     python $GITHUB_WORKSPACE/createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
+      - name: Create authentication token
         run: |
           echo ${pwd}
           ls
           python $GITHUB_WORKSPACE/createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
-      
