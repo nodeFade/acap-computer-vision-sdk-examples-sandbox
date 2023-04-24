@@ -2,9 +2,9 @@ import requests
 import sys
 import os
 
-password = sys.argv[1]
-username = sys.argv[2]
-url_base = sys.argv[3]
+# password = sys.argv[1]
+# username = sys.argv[2]
+# url_base = sys.argv[3]
 
 class Authentication:
     def __init__(self, password, username, url_base):
@@ -13,35 +13,10 @@ class Authentication:
         self.url_base = url_base
         
 # def get_token(username, password, url_base):
+# This makes the authentication process more secure 
+# because you don't have to store your username and password in your code 
+# or send them over the network for each request.
     def get_auth_token(self):
-        # Define the authentication endpoint URL
-        auth_url = f"{url_base}/api/auth/token"
-
-        # Define the request headers
-        headers = {
-            "Content-Type": "application/json"
-        }
-
-        # Define the request body
-        data = {
-            "username": username,
-            "password": password
-        }
-
-        # Send the POST request to the authentication endpoint
-        response = requests.post(auth_url, headers=headers, json=data)
-
-        # If the request was successful, return the token
-        if response.status_code == 200:
-            token = response.json()["token"]
-            print(f"Token created: {token}")
-            return token
-
-        # If the request failed, raise an exception
-        else:
-            raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
-    
-    def login(self):
         # Define the authentication endpoint URL
         auth_url = f"{self.url_base}/api/auth/token"
 
@@ -62,29 +37,69 @@ class Authentication:
         # If the request was successful, return the token
         if response.status_code == 200:
             token = response.json()["token"]
+            # print(f"Token created: {token}")
             return token
 
         # If the request failed, raise an exception
         else:
             raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
         
-    def logout(self):
-        # Define the logout endpoint URL
-        logout_url = f"{self.url_base}/api/auth/logout"
+# read the secrets from environment variables
+username = os.environ.get("CAM_USERNAME")
+password = os.environ.get("CAM_PASSWORD")
+url_base = os.environ.get("URL_BASE")
 
-        # Define the request headers
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.token}"
-        }
+# create an Authentication object
+auth = Authentication(username, password, url_base)
 
-        # Send the POST request to the logout endpoint
-        response = requests.post(logout_url, headers=headers)
+# get the auth token and print it
+auth_token = auth.get_auth_token()
+print("Auth token:", auth_token)  
+    
+    # def login(self):
+    #     # Define the authentication endpoint URL
+    #     auth_url = f"{self.url_base}/api/auth/token"
 
-        # If the request was successful, print a success message
-        if response.status_code == 200:
-            print("User logged out successfully.")
+    #     # Define the request headers
+    #     headers = {
+    #         "Content-Type": "application/json"
+    #     }
 
-        # If the request failed, raise an exception
-        else:
-            raise Exception(f"Failed to log out user: {response.status_code} {response.reason}")
+    #     # Define the request body
+    #     data = {
+    #         "username": self.username,
+    #         "password": self.password
+    #     }
+
+    #     # Send the POST request to the authentication endpoint
+    #     response = requests.post(auth_url, headers=headers, json=data)
+
+    #     # If the request was successful, return the token
+    #     if response.status_code == 200:
+    #         token = response.json()["token"]
+    #         return token
+
+    #     # If the request failed, raise an exception
+    #     else:
+    #         raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
+        
+    # def logout(self):
+    #     # Define the logout endpoint URL
+    #     logout_url = f"{self.url_base}/api/auth/logout"
+
+    #     # Define the request headers
+    #     headers = {
+    #         "Content-Type": "application/json",
+    #         "Authorization": f"Bearer {self.token}"
+    #     }
+
+    #     # Send the POST request to the logout endpoint
+    #     response = requests.post(logout_url, headers=headers)
+
+    #     # If the request was successful, print a success message
+    #     if response.status_code == 200:
+    #         print("User logged out successfully.")
+
+    #     # If the request failed, raise an exception
+    #     else:
+    #         raise Exception(f"Failed to log out user: {response.status_code} {response.reason}")
