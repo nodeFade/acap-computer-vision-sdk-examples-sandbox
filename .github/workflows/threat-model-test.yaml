@@ -26,4 +26,5 @@ jobs:
           WORKDIR: acap-computer-vision-sdk-examples-sandbox
         run: |
           echo ${pwd}
-          create-token.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
+          ls
+          python $GITHUB_WORKSPACE/create-token.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
