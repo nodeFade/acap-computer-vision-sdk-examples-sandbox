@@ -41,6 +41,8 @@ def check_root_control():
         return False  # There are non-root users with permissions
     return True  # Only the root user has permissions
 
+# Call the check_root_control function and print its return value
+print(check_root_control())
 
 # def test_device_control():
 
