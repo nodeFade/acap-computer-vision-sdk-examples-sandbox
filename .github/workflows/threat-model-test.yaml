@@ -10,6 +10,8 @@ on:
 jobs:  
   build:
     runs-on: self-hosted
+    container:
+      image: python:3.9
     env:   
       EXREPO: acap-computer-vision-examples-sandbox 
       WORKDIR: acap-computer-vision-sdk-examples-sandbox
@@ -24,6 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd "$GITHUB_WORKSPACE"
+          sudo apt-get update && sudo apt-get install python3.9 -y
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -34,4 +37,3 @@ jobs:
           echo ${pwd}
           ls
           python $GITHUB_WORKSPACE/create-token.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
-          
