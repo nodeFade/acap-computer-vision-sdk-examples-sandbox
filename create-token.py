@@ -50,3 +50,4 @@ def get_auth_token(self):
     else:
         raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
     
+get_auth_token()
