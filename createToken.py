@@ -45,7 +45,7 @@ class Authentication:
         else:
             raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
      
-
+    print(get_auth_token())
     # def login(self):
     #     # Define the authentication endpoint URL
     #     auth_url = f"{self.url_base}/api/auth/token"
