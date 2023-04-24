@@ -38,5 +38,4 @@ jobs:
         run: |
           echo ${pwd}
           ls
-          python $GITHUB_WORKSPACE/create-token.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
-          
+          python $GITHUB_WORKSPACE/createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
