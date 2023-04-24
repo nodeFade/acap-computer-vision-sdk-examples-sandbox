@@ -50,4 +50,6 @@ def get_auth_token(self):
     else:
         raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
     
-get_auth_token()
+my_instance = Authentication()
+token = my_instance.get_auth_token()
+print(token)
