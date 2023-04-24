@@ -1,48 +1,68 @@
 import requests
 import sys
-import os
+import json
 
-# password = sys.argv[1]
-# username = sys.argv[2]
-# url_base = sys.argv[3]
+password = sys.argv[1]
+username = sys.argv[2]
+url_base = sys.argv[3]
 
-class Authentication:
-    def __init__(self, password, username, url_base):
-        self.password = password
-        self.username = username
-        self.url_base = url_base
+def create_token(username, password, url_base):
+    url = url_base + "/api/v1/token"
+    payload = {"username": username, "password": password}
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, data=json.dumps(payload), headers=headers)
+    response_json = response.json()
+    token = response_json["access_token"]
+    
+    # Verify the token by sending a request using the token
+    verify_url = url_base + "/api/v1/verify"
+    verify_headers = {"Authorization": f"Bearer {token}"}
+    verify_response = requests.get(verify_url, headers=verify_headers)
+    if verify_response.status_code == 200:
+        print("Token verification succeeded!")
+    else:
+        print("Token verification failed!")
+    
+    return token
+################################################################################
+
+# class Authentication:
+#     def __init__(self, password, username, url_base):
+#         self.password = password
+#         self.username = username
+#         self.url_base = url_base
         
-# def get_token(username, password, url_base):
-# This makes the authentication process more secure 
-# because you don't have to store your username and password in your code 
-# or send them over the network for each request.
-    def get_auth_token(self):
-        # Define the authentication endpoint URL
-        auth_url = f"{self.url_base}/api/auth/token"
+# # def get_token(username, password, url_base):
+# # This makes the authentication process more secure 
+# # because you don't have to store your username and password in your code 
+# # or send them over the network for each request.
+#     def get_auth_token(self):
+#         # Define the authentication endpoint URL
+#         auth_url = f"{self.url_base}/api/auth/token"
 
-        # Define the request headers
-        headers = {
-            "Content-Type": "application/json"
-        }
+#         # Define the request headers
+#         headers = {
+#             "Content-Type": "application/json"
+#         }
 
-        # Define the request body
-        data = {
-            "username": self.username,
-            "password": self.password
-        }
+#         # Define the request body
+#         data = {
+#             "username": self.username,
+#             "password": self.password
+#         }
 
-        # Send the POST request to the authentication endpoint
-        response = requests.post(auth_url, headers=headers, json=data)
+#         # Send the POST request to the authentication endpoint
+#         response = requests.post(auth_url, headers=headers, json=data)
 
-        # If the request was successful, return the token
-        if response.status_code == 200:
-            token = response.json()["token"]
-            print(f"Token created: {token}")
-            return token
+#         # If the request was successful, return the token
+#         if response.status_code == 200:
+#             token = response.json()["token"]
+#             print(f"Token created: {token}")
+#             return token
 
-        # If the request failed, raise an exception
-        else:
-            raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
+#         # If the request failed, raise an exception
+#         else:
+#             raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
      
 
     # def login(self):

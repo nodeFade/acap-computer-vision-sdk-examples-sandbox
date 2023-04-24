@@ -31,19 +31,11 @@ jobs:
           pip install -r requirements.txt
           pip install requests
 
-      - name: Create authentication token
-        run: |
-          echo ${pwd}
-          ls
-          python $GITHUB_WORKSPACE/fileToBeDeleted.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
+      - name: Create token
+        run: python createToken.py ${{ secrets.username }} ${{ secrets.password }} ${{ secrets.url_base }}
+        env:
+          TOKEN: ${{ secrets.token }}
 
-      # - name: Create Token
-      #   run: python createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
-      #   env:
-      #     password: ${{secrets.cam_password}}
-      #     username: ${{secrets.cam_username}}
-      #     url_base: ${{secrets.url_base}}
-      
-      - name: Print Token
-        run: echo ${{ env.token }}
+      - name: Run device threat model
+        run: python device-threat-model.py $TOKEN
 
