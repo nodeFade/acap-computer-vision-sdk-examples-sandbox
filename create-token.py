@@ -2,10 +2,6 @@ import requests
 import sys
 import os
 
-# password=$1
-# username=$2
-# url_base=$3
-
 password = sys.argv[1]
 username = sys.argv[2]
 url_base = sys.argv[3]
@@ -16,11 +12,6 @@ class Authentication:
         self.username = username
         self.url_base = url_base
         
-# def get_auth_token(self):
-        # your authentication code here
-        # returns the auth token
-#         return "your_auth_token_here"
-    
 # def get_token(username, password, url_base):
     def get_auth_token(self):
         # Define the authentication endpoint URL
