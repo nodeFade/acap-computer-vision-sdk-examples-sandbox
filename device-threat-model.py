@@ -2,6 +2,8 @@ import requests
 import sys
 from createToken import Authentication
 
+# token = sys.argv[1]
+
 password = sys.argv[1]
 username = sys.argv[2]
 url_base = sys.argv[3]

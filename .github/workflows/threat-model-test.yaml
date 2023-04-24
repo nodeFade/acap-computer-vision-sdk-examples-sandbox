@@ -31,11 +31,26 @@ jobs:
           pip install -r requirements.txt
           pip install requests
 
-      - name: Create token
-        run: python createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
+      # - name: Create Token
+      #   run: |
+      #     echo ${pwd}
+      #     ls
+      #     python $GITHUB_WORKSPACE/createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
+
+      - name: Create Token
+        run: python $GITHUB_WORKSPACE/createToken.py ${{secrets.CAM_PASSWORD}} ${{secrets.CAM_USERNAME}} ${{secrets.URL_BASE}}
         env:
-          TOKEN: ${{ secrets.token }}
+          password: ${{secrets.CAM_PASSWORD}}
+          username: ${{secrets.CAM_USERNAME}}
+          url_base: ${{secrets.URL_BASE}}
+      
+      - name: Print Token
+        run: echo ${{ env.token }}
 
-      - name: Run device threat model
-        run: python device-threat-model.py $TOKEN
+      # - name: Create token
+      #         run: python createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
+      #         env:
+      #           TOKEN: ${{ secrets.token }}
 
+      #       - name: Run device threat model
+      #         run: python device-threat-model.py $TOKEN
