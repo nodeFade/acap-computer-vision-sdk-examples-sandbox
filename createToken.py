@@ -2,9 +2,9 @@ import requests
 import sys
 import os
 
-password = sys.argv[1]
-username = sys.argv[2]
-url_base = sys.argv[3]
+# password = sys.argv[1]
+# username = sys.argv[2]
+# url_base = sys.argv[3]
 
 class Authentication:
     def __init__(self, password, username, url_base):
@@ -43,7 +43,7 @@ class Authentication:
         # If the request failed, raise an exception
         else:
             raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
-        
+     
 
     # def login(self):
     #     # Define the authentication endpoint URL
