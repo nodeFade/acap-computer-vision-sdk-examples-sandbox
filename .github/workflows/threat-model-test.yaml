@@ -32,7 +32,7 @@ jobs:
           pip install requests
 
       - name: Create token
-        run: python createToken.py ${{ secrets.username }} ${{ secrets.password }} ${{ secrets.url_base }}
+        run: python createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
         env:
           TOKEN: ${{ secrets.token }}
 
