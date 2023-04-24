@@ -26,4 +26,4 @@ jobs:
           cd ${WORKDIR}
           cd WORKDIR
           echo ${pwd}
-          device-threat-model.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
+          create-token.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}

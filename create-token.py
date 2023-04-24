@@ -1,11 +1,14 @@
 import requests
+import sys
 import os
 
-password=$1
-username=$2
-url_base=$3
+# password=$1
+# username=$2
+# url_base=$3
 
-import os
+password = sys.argv[1]
+username = sys.argv[2]
+url_base = sys.argv[3]
 
 class Authentication:
     def __init__(self, username, password, url_base):
