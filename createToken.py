@@ -2,9 +2,9 @@ import requests
 import sys
 import os
 
-# password = sys.argv[1]
-# username = sys.argv[2]
-# url_base = sys.argv[3]
+password = sys.argv[1]
+username = sys.argv[2]
+url_base = sys.argv[3]
 
 class Authentication:
     def __init__(self, password, username, url_base):
