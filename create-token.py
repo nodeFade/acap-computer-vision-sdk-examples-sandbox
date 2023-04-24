@@ -50,6 +50,6 @@ class Authentication:
         else:
             raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
     
-my_instance = Authentication(password, username, url_base)
+my_instance = Authentication()
 token = my_instance.get_auth_token()
 print(token)
