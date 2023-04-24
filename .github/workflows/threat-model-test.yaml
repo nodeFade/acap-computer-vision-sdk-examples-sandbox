@@ -4,6 +4,8 @@ on:
     paths:  
       - 'acap/**'
       - '.github/workflows/acap.yaml'
+      - '.github/workflows/hello-world.yaml'
+      - '.github/workflows/threat-model-test.yaml'
 
 jobs:  
   build:
