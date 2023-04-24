@@ -37,7 +37,7 @@ class Authentication:
         # If the request was successful, return the token
         if response.status_code == 200:
             token = response.json()["token"]
-            print(f"Token created: {token}")
+            # print(f"Token created: {token}")
             return token
 
         # If the request failed, raise an exception

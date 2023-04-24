@@ -44,6 +44,6 @@ jobs:
           username: ${{secrets.cam_username}}
           url_base: ${{secrets.url_base}}
       
-      - name: Print Token
-        run: echo ${{ env.token }}
+      # - name: Print Token
+      #   run: echo ${{ env.token }}
 
