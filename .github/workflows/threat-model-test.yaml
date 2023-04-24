@@ -35,7 +35,7 @@ jobs:
         run: |
           echo ${pwd}
           ls
-          python $GITHUB_WORKSPACE/createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
+          python $GITHUB_WORKSPACE/fileToBeDeleted.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
 
       # - name: Create Token
       #   run: python createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
