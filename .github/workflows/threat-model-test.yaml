@@ -20,7 +20,7 @@ jobs:
         include:   
           - arch: aarch64
           # - arch: armv7hf  
-    
+
     steps:    
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -34,7 +34,7 @@ jobs:
       - name: Create token
         id: create_token
         run: |
-          python $GITHUB_WORKSPACE/deviceThreatModel.py "pass" "root" "http://172.25.65.98"
+          python $GITHUB_WORKSPACE/createToken.py "pass" "root" "http://172.25.65.98"
         # python $GITHUB_WORKSPACE/createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
         env:
           PYTHONUNBUFFERED: 1

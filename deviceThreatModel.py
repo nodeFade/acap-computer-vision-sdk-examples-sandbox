@@ -11,7 +11,7 @@ url_base = sys.argv[3]
 # Set up the necessary URLs and parameters for the API request
 base_url = url_base
 auth_token = password
-get_users_url = f"{base_url}/users"
+get_users_url = f"{base_url}/camera/index.html#/system/users"
 get_permissions_url = f"{base_url}/permissions"
 headers = {"Authorization": f"Bearer {auth_token}"}
 
