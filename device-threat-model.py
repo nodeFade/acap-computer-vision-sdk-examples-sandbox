@@ -1,4 +1,10 @@
 import requests
+import sys
+from createToken import Authentication
+
+password = sys.argv[1]
+username = sys.argv[2]
+url_base = sys.argv[3]
 
 # from authentication import authenticate
 
@@ -10,9 +16,13 @@ import requests
 #     else:
 #         print("Authentication failed!")
 
+# auth = Authentication(username, password, url_base)
+# auth_token = auth.login()
+
+
 # Set up the necessary URLs and parameters for the API request
-base_url = "https://api.example.com"
-auth_token = "your-auth-token"
+base_url = url_base
+auth_token = password
 get_users_url = f"{base_url}/users"
 get_permissions_url = f"{base_url}/permissions"
 headers = {"Authorization": f"Bearer {auth_token}"}
@@ -44,7 +54,6 @@ def check_root_control():
     return True  # Only the root user has permissions
 
 
-
 def test_device_control():
 
     # Set up the authentication token for the root user
@@ -64,32 +73,30 @@ def test_device_control():
     non_root_response = requests.post(url, headers=non_root_headers)
     assert non_root_response.status_code == 401, "Non-root user authorized to control device"
 
-
-
 def test_tls_control():
     # Login as the root user and get an auth token
-    auth_token = login("root", "password")
+    auth_token = Authentication.login(username, password)
 
     # Set the headers with the auth token
     headers = {"Authorization": f"Bearer {auth_token}"}
 
     # Access the TLS settings and make a change
     tls_config = {"key": "value"}
-    response = requests.post("https://example.com/tls/settings", headers=headers, json=tls_config)
+    response = requests.post("https://{url_base}/tls/settings", headers=headers, json=tls_config)
     assert response.status_code == 200
 
     # Verify that the change was successful
-    response = requests.get("https://example.com/tls/settings", headers=headers)
+    response = requests.get("https://{url_base}/tls/settings", headers=headers)
     assert response.status_code == 200
     assert response.json() == tls_config
 
     # Logout
-    logout()
+    Authentication.logout()
 
-    # Attempt to access the TLS settings as the user or operator and make a change
-    auth_token = login("user", "password")
-    headers = {"Authorization": f"Bearer {auth_token}"}
-    tls_config = {"key": "value"}
-    response = requests.post("https://example.com/tls/settings", headers=headers, json=tls_config)
-    assert response.status_code == 403
-    assert "Unauthorized" in response.json()["message"]
+# Attempt to access the TLS settings as the user or operator and make a change
+auth_token = Authentication.login("user", password)
+headers = {"Authorization": f"Bearer {auth_token}"}
+tls_config = {"key": "value"}
+response = requests.post("https://{url_base}/tls/settings", headers=headers, json=tls_config)
+assert response.status_code == 403
+assert "Unauthorized" in response.json()["message--not authorized"]
