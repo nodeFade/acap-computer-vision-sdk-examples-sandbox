@@ -19,7 +19,7 @@ jobs:
       matrix:
         include:   
           - arch: aarch64
-          # - arch: armv7hf
+          # - arch: armv7hf  
 
     steps:
       - uses: actions/checkout@v2

@@ -43,10 +43,10 @@ def get_auth_token(self):
     # If the request was successful, return the token
     if response.status_code == 200:
         token = response.json()["token"]
+        print(f"Token created: {token}")
         return token
 
     # If the request failed, raise an exception
     else:
         raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
     
-get_auth_token()
