@@ -25,7 +25,5 @@ jobs:
         env:
           WORKDIR: acap-computer-vision-sdk-examples-sandbox
         run: |
-          cd ${WORKDIR}
-          cd WORKDIR
           echo ${pwd}
           create-token.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
