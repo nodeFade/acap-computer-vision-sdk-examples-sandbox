@@ -44,17 +44,6 @@ class Authentication:
         else:
             raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
         
-# read the secrets from environment variables
-# username = os.environ.get("CAM_USERNAME")
-# password = os.environ.get("CAM_PASSWORD")
-# url_base = os.environ.get("URL_BASE")
-
-# create an Authentication object
-auth = Authentication(username, password, url_base)
-
-# get the auth token and print it
-auth_token = auth.get_auth_token()
-print("Auth token:", auth_token)  
     
     # def login(self):
     #     # Define the authentication endpoint URL
