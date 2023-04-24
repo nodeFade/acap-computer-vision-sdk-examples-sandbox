@@ -31,21 +31,23 @@ jobs:
           pip install -r requirements.txt
           pip install requests
 
-      # - name: Create Token
-      #   run: |
-      #     echo ${pwd}
-      #     ls
-      #     python $GITHUB_WORKSPACE/createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
-
       - name: Create Token
-        run: python $GITHUB_WORKSPACE/createToken.py ${{secrets.CAM_PASSWORD}} ${{secrets.CAM_USERNAME}} ${{secrets.URL_BASE}}
+        run: |
+          echo ${pwd}
+          ls
+          python $GITHUB_WORKSPACE/createToken.py ${{secrets.cam_password}} ${{secrets.cam_username}} ${{secrets.url_base}}
         env:
-          password: ${{secrets.CAM_PASSWORD}}
-          username: ${{secrets.CAM_USERNAME}}
-          url_base: ${{secrets.URL_BASE}}
+          PYTHONUNBUFFERED: 1
+
+      # - name: Create Token
+      #   run: python $GITHUB_WORKSPACE/createToken.py ${{secrets.CAM_PASSWORD}} ${{secrets.CAM_USERNAME}} ${{secrets.URL_BASE}}
+      #   env:
+      #     password: ${{secrets.CAM_PASSWORD}}
+      #     username: ${{secrets.CAM_USERNAME}}
+      #     url_base: ${{secrets.URL_BASE}}
       
-      - name: Print Token
-        run: echo ${{ env.token }}
+      # - name: Print Token
+      #   run: echo ${{ env.token }}
 
       # - name: Create token
       #         run: python createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
