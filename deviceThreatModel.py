@@ -8,6 +8,7 @@ password = sys.argv[1]
 username = sys.argv[2]
 url_base = sys.argv[3]
 
+
 # Set up the necessary URLs and parameters for the API request
 base_url = url_base
 auth_token = password

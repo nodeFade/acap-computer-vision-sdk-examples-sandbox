@@ -32,31 +32,11 @@ jobs:
           pip install requests
 
       - name: Create token
-        id: create_token
         run: |
-          python $GITHUB_WORKSPACE/createToken.py "pass" "root" "http://172.25.65.98"
-        # python $GITHUB_WORKSPACE/createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
+          python $GITHUB_WORKSPACE/createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
         env:
           PYTHONUNBUFFERED: 1
-        shell: bash
-      # - name: Use token
-      #   run: |
-      #     echo "Token is ${{ steps.create_token.outputs.token }}"
+          TOKEN: ${{ secrets.token }}
 
-      # - name: Create Token
-      #   run: python $GITHUB_WORKSPACE/createToken.py ${{secrets.CAM_PASSWORD}} ${{secrets.CAM_USERNAME}} ${{secrets.URL_BASE}}
-      #   env:
-      #     password: ${{secrets.CAM_PASSWORD}}
-      #     username: ${{secrets.CAM_USERNAME}}
-      #     url_base: ${{secrets.URL_BASE}}
-      
-      # - name: Print Token
-      #   run: echo ${{ env.token }}
-
-      # - name: Create token
-      #         run: python createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
-      #         env:
-      #           TOKEN: ${{ secrets.token }}
-
-      #       - name: Run device threat model
-      #         run: python device-threat-model.py $TOKEN
+      # - name: Run device threat model
+      #   run: python device-threat-model.py $TOKEN

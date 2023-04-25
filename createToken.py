@@ -1,6 +1,5 @@
 import requests
 import sys
-import json
 
 password = sys.argv[1]
 username = sys.argv[2]
@@ -19,11 +18,13 @@ class Authentication:
 # or send them over the network for each request.
     def get_auth_token(self):
         # Define the authentication endpoint URL
-        auth_url = f"{self.url_base}/api/auth/token"
+        auth_url = f"{self.url_base}/axis-cgi/login.cgi"
 
         # Define the request headers
         headers = {
+
             "Content-Type": "application/json"
+            
         }
 
         # Define the request body
@@ -45,10 +46,11 @@ class Authentication:
         else:
             raise Exception(f"Failed to authenticate user: {response.status_code} {response.reason}")
         
+
 if __name__ == '__main__':
     auth = Authentication(password, username, url_base)
-    token = auth.get_auth_token()
-    print(f"Token created: {token}")
+    theToken = auth.get_auth_token()
+    print(f"Token created: {theToken}")
 
     # def login(self):
     #     # Define the authentication endpoint URL
