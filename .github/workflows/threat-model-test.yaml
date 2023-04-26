@@ -50,7 +50,7 @@ jobs:
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox
           echo $(pwd)
           sshpass -p ${{ secrets.ROOT_PASSWORD }} ssh ${{ secrets.ROOT_USERNAME}}@${{ secrets.DEVICE_IP }} 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
-          docker run --rm axisecp/docker-acap:latest-aarch64 <device IP> <device password> install
+          docker run --rm axisecp/docker-acap:latest-aarch64 ${{ secrets.ROOT_USERNAME }} ${{ secrets.ROOT_PASSWORD }} install
       
       - name: create certificate for handshake.
         run: | 
