@@ -39,7 +39,7 @@ jobs:
 
       # - name: verify root can remove daomen if installed.
       #   run: |
-      #     curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=remove&package=dockerdwrapper"
+      #     curl --noproxy '*' -k --anyauth -u ${{ secrets.ROOT_USERNAME }}:${{ secrets.ROOT_PASSWORD}} --header "Content-Type: application/json"  "https://${{ secrets.DEVICE_IP }}/axis-cgi/applications/control.cgi?action=remove&package=dockerdwrapper"
 
       - name: installing daemon
         run: |

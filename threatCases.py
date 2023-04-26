@@ -9,7 +9,13 @@ user_password = sys.argv[5]
 operator_username = sys.argv[6]
 operator_password =sys.argv[7]
 
-
+# device_ip = '172.25.65.98'  # Replace with the IP address of your device
+# root_username = 'root'  # Replace with your username
+# root_password = 'pass'  # Replace with your password
+# user_username = 'user'  # Replace with a non-admin username
+# user_password = 'pass'  # Replace with the non-admin password
+# operator_username = 'operator'
+# operator_password = 'pass'
 
 def verify_only_root_can_update_TLS():
     url = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes'

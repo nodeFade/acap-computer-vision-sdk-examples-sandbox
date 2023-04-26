@@ -4,9 +4,9 @@
 import paramiko
 import sys
 import requests
-# password = sys.argv[1]
-# username = sys.argv[2]
-# url_base = sys.argv[3]
+password = sys.argv[1]
+username = sys.argv[2]
+url_base = sys.argv[3]
 
 # Set up the SSH client
 ssh_client = paramiko.SSHClient()
@@ -26,8 +26,8 @@ ssh_client.close()
 
 
 # print out the output for HTTP request
-# curl -s --anyauth -u root:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"    # < HTTP/1.1 200 OK
-# curl -s --anyauth -u user:"pass" "http://172.25.65.98/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"    # < HTTP/1.1 401 Unauthorized
+# curl -s --anyauth -u username:password "http://{url_base}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"    # < HTTP/1.1 200 OK
+# curl -s --anyauth -u username:password "http://{url_base}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes"    # < HTTP/1.1 401 Unauthorized
 
 
 # from requests.auth import HTTPBasicAuth
