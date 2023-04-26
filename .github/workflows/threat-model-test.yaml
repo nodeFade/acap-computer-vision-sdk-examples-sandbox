@@ -36,3 +36,4 @@ jobs:
           python $GITHUB_WORKSPACE/threatModelCases.py ${{ secrets.DEVICE_IP }} ${{ secrets.ROOT_USERNAME}} ${{ secrets.ROOT_PASSWORD }} ${{ secrets.USER_USERNAME }} ${{ secrets.USER_PASSWORD }} ${{ secrets.OPERATOR_USERNAME }}  ${{ secrets.OPERATOR_PASSWORD }}  
         env:
           PYTHONUNBUFFERED: 1
+ 
