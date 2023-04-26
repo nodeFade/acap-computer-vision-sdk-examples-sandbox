@@ -21,8 +21,56 @@ jobs:
           - arch: aarch64
           # - arch: armv7hf  
             
-    steps:    
+    steps:
       - uses: actions/checkout@v2
+      - name: test to get architecture on another camera
+        env: 
+          DEVICE_IP: "<device IP>"
+          DEVICE_PASSWORD: 'pass'
+        run: |
+          ok=$(curl -v -s --noproxy '*' --anyauth -u <device username: device password> -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://<device IP>/axis-cgi/basicdeviceinfo.cgi)
+          echo  "response from curl= $ok" 
+          ok=${ok#*Architecture}
+          echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
+          echo ok=$(echo $ok | cut -d '"' -f 3)
+
+      - name: get the requirements
+        run: |
+          echo $(pwd)
+          docker buildx install
+          docker buildx version
+          docker --version
+
+      # - name: verify root can remove daomen if installed.
+      #   run: |
+      #     curl --noproxy '*' -k --anyauth -u root:"pass" --header "Content-Type: application/json"  "https://172.25.65.98/axis-cgi/applications/control.cgi?action=remove&package=dockerdwrapper"
+
+      - name: installing daemon
+        run: |
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox
+          echo $(pwd)
+          sshpass -p "<device password>" ssh <device username>@<device IP> 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
+          docker run --rm axisecp/docker-acap:latest-aarch64 <device IP> <device password> install
+      
+      - name: create certificate for handshake.
+        run: | 
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
+          echo $(pwd)
+          chmod +x tls_setup.sh 
+          echo $(pwd)
+          sh -v tls_setup.sh <device IP> dockerdwrapper
+
+      - name: move the required files to required place.
+        run: |
+          cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
+          cp ca.pem key.pem cert.pem ../../../../../
+          cd ../../../../../
+          mv ca.pem key.pem cert.pem ./.docker
+          chmod 600 ./.docker   
+          chmod -R 755 ./.docker 
+        # chmod 600 to use file permissions to secure sensitive files by making them readable and writable only by the owner.
+        # chmod -R 755 set permissions on a directory and all of its contents recursively using the -R option with the chmod.
+        
       - name: Install dependencies
         run: |
           cd "$GITHUB_WORKSPACE"
