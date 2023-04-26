@@ -132,4 +132,5 @@ jobs:
           getent group docker
           
 
-        
+# todo..
+# pip install paramiko

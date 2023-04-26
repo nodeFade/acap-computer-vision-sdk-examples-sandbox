@@ -31,12 +31,8 @@ jobs:
           pip install -r requirements.txt
           pip install requests
 
-      - name: Create token
+      - name: Run the python file with secret credentials.
         run: |
-          python $GITHUB_WORKSPACE/createToken.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
+          python $GITHUB_WORKSPACE/testCases.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
         env:
           PYTHONUNBUFFERED: 1
-          TOKEN: ${{ secrets.token }}
-
-      # - name: Run device threat model
-      #   run: python device-threat-model.py $TOKEN
