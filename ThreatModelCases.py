@@ -21,7 +21,7 @@ def verify_only_root_can_update_TLS():
     url = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes'
 
     # Test request with root credentials
-    root_response = requests.get(url, auth=(username, password))
+    root_response = requests.get(url, auth=(root_username, root_password))
 
     if root_response.status_code == 200:
         print('Root request succeeded')

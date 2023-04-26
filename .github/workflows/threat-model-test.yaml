@@ -33,6 +33,6 @@ jobs:
 
       - name: Run the python file with secret credentials.
         run: |
-          python $GITHUB_WORKSPACE/testCases.py ${{ secrets.CAM_PASSWORD }} ${{ secrets.CAM_USERNAME}} ${{ secrets.URL_BASE }}
+          python $GITHUB_WORKSPACE/testCases.py ${{ secrets.DEVICE_IP }} ${{ secrets.ROOT_USERNAME}} ${{ secrets.ROOT_PASSWORD }} ${{ secrets.USER_USERNAME }} ${{ secrets.USER_PASSWORD }} ${{ secrets.OPERATOR_USERNAME }}  ${{ secrets.OPERATOR_PASSWORD }}  
         env:
           PYTHONUNBUFFERED: 1
