@@ -1,16 +1,18 @@
 import requests
 import sys
 # Github actions workflow variables
-device_ip = sys.argv[1]
-root_username = sys.argv[2]
-root_password = sys.argv[3]
-user_username = sys.argv[4]
-user_password = sys.argv[5]
-operator_username = sys.argv[6]
-operator_password =sys.argv[7]
+# device_ip = sys.argv[1]
+# root_username = sys.argv[2]
+# root_password = sys.argv[3]
+# user_username = sys.argv[4]
+# user_password = sys.argv[5]
+# operator_username = sys.argv[6]
+# operator_password =sys.argv[7]
 
 
 
+
+print("####################### TEST 1 ######################")
 def verify_only_root_can_update_TLS():
     # The Root should get inside the camera and change the TLS setup.
     # The User should get inside the camera but not allowed to reach the TLS and the operator as well. 
@@ -42,7 +44,7 @@ def verify_only_root_can_update_TLS():
         print(f'Operator request failed with status code {operator_response.status_code}')
 verify_only_root_can_update_TLS()
 
-
+print("####################### TEST 2 ######################")
 import subprocess
 import paramiko
 # The daemon running on prot 2375 while not using the TLS else it's running on port 2376.
@@ -82,7 +84,7 @@ def acap_without_tls_running_on_port_2375():
     ssh_client.close()
 acap_without_tls_running_on_port_2375()
 
-
+print("####################### TEST 3 ######################")
 def try_to_enject_invalid_value_to_run_dockerd():
     # When attacker get inside the camera, granted root credentials
     # thus the root credentials used in this case.
@@ -130,7 +132,7 @@ try_to_enject_invalid_value_to_run_dockerd()
 # So from outside - if TLS is disabled port 2376 will stop working but an attacker would be able to access on port 2375.
 # The certificates can remain on the camera - they will not be used if TLS is off.
 
-
+print("####################### TEST 4 ######################")
 def attcker_have_internal_access_the_daemon_should_stop_with_no_parameters():
     # If you remove the value "no|No" from the (/usr/local/packages/dockerdwrapper/param.conf) file and add remove or delete
     # that will no affect the docker-acap and it will continue as last value tested (UseTLS=yes|no).
@@ -156,7 +158,7 @@ def attcker_have_internal_access_the_daemon_should_stop_with_no_parameters():
     ssh_client.close()
 attcker_have_internal_access_the_daemon_should_stop_with_no_parameters()
 
-
+print("####################### TEST 5 ######################")
 def config_file_edited_only_by_root():
     # The daemon.json should have permission read and write while the other groups and users can only read the file.
     # thus in the output (-rw-r--r--) is displayed and that mean the file can only readable and writable from the root.
