@@ -33,7 +33,6 @@ jobs:
       - name: get the requirements
         run: |
           echo $(pwd)
-          ls
           docker buildx install
           docker buildx version
           docker --version
