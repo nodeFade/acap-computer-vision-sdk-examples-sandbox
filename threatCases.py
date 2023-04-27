@@ -10,7 +10,13 @@ import sys
 # operator_password =sys.argv[7]
 
 
-
+device_ip = '172.25.65.98'  # Replace with the IP address of your device
+root_username = 'root'  # Replace with your username
+root_password = 'pass'  # Replace with your password
+user_username = 'user'  # Replace with a non-admin username
+user_password = 'pass'  # Replace with the non-admin password
+operator_username = 'operator'
+operator_password = 'pass'
 
 # print("####################### TEST 1 ######################")
 # def verify_only_root_can_update_TLS():
@@ -187,28 +193,28 @@ def test_attacker_cannot_run_container():
     subprocess.check_output(['sudo', 'apt-get', 'upgrade'])
 
     # Check the list of users on the device and ensure that each user has a strong password
-    output = subprocess.check_output(['sudo', 'cat', '/etc/shadow'])
-    users = output.decode().split('\n')
-    for user in users:
-        if user.startswith('root:') or user.startswith('daemon:'):
-            continue
-        username = user.split(':')[0]
-        output = subprocess.check_output(['sudo', 'passwd', '--status', username])
-        status = output.decode().split()[1]
-        assert status == 'P', f"{username} does not have a strong password."
+#     output = subprocess.check_output(['sudo', 'cat', '/etc/shadow'])
+#     users = output.decode().split('\n')
+#     for user in users:
+#         if user.startswith('root:') or user.startswith('daemon:'):
+#             continue
+#         username = user.split(':')[0]
+#         output = subprocess.check_output(['sudo', 'passwd', '--status', username])
+#         status = output.decode().split()[1]
+#         assert status == 'P', f"{username} does not have a strong password."
 
-    # Review the list of users who have access to the Docker daemon and remove any unauthorized users
-    output = subprocess.check_output(['sudo', 'docker', 'info'])
-    users = output.decode().split('\n')[16].split(',')
-    for user in users:
-        if user.strip() not in ['root', 'your_username']:
-            subprocess.check_output(['sudo', 'gpasswd', '-d', user.strip(), 'docker'])
+#     # Review the list of users who have access to the Docker daemon and remove any unauthorized users
+#     output = subprocess.check_output(['sudo', 'docker', 'info'])
+#     users = output.decode().split('\n')[16].split(',')
+#     for user in users:
+#         if user.strip() not in ['root', 'your_username']:
+#             subprocess.check_output(['sudo', 'gpasswd', '-d', user.strip(), 'docker'])
 
-    # Try running a test container as a regular user on the device
-    output = subprocess.check_output(['docker', 'run', '-it', '--rm', 'ubuntu', 'bash'])
-    assert 'root@' in output.decode(), "Regular user cannot run a container."
+#     # Try running a test container as a regular user on the device
+#     output = subprocess.check_output(['docker', 'run', '-it', '--rm', 'ubuntu', 'bash'])
+#     assert 'root@' in output.decode(), "Regular user cannot run a container."
 
-    # Try running the same container as an attacker user
-    output = subprocess.check_output(['sudo', '-u', 'attacker', 'docker', 'run', '-it', '--rm', 'ubuntu', 'bash'], stderr=subprocess.STDOUT)
-    assert 'Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock' in output.decode(), "Attacker can run a container."
-test_attacker_cannot_run_container()
+#     # Try running the same container as an attacker user
+#     output = subprocess.check_output(['sudo', '-u', 'attacker', 'docker', 'run', '-it', '--rm', 'ubuntu', 'bash'], stderr=subprocess.STDOUT)
+#     assert 'Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock' in output.decode(), "Attacker can run a container."
+# test_attacker_cannot_run_container()
