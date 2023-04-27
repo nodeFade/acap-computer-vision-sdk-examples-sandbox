@@ -33,7 +33,6 @@ jobs:
       - name: get the requirements
         run: |
           echo $(pwd)
-          echo 'export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"' >> $GITHUB_ENV 
           docker buildx install
           docker buildx version
           docker --version
