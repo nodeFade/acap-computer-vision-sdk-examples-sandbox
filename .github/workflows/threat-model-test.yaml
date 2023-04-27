@@ -38,10 +38,9 @@ jobs:
         run: |
           echo $(pwd)
           ls
-          chmod +x ~/.docker/cli-plugins/docker-buildx
+          docker buildx install
           docker buildx version
           docker --version
-        # docker buildx install
 
       # - name: verify root can remove daomen if installed.
       #   run: |
