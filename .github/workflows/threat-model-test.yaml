@@ -20,7 +20,7 @@ jobs:
         include:   
           - arch: aarch64
           # - arch: armv7hf  
-              
+
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -30,6 +30,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install requests
+          pip install paramiko
 
       - name: Run the python file with secret credentials.
         run: |
