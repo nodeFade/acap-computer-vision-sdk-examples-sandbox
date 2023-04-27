@@ -1,4 +1,5 @@
 import requests
+import paramiko
 import sys
 # Github actions workflow variables
 device_ip = sys.argv[1]
@@ -9,14 +10,10 @@ user_password = sys.argv[5]
 operator_username = sys.argv[6]
 operator_password =sys.argv[7]
 
-# device_ip = '172.25.65.98'  # Replace with the IP address of your device
-# root_username = 'root'  # Replace with your username
-# root_password = 'pass'  # Replace with your password
-# user_username = 'user'  # Replace with a non-admin username
-# user_password = 'pass'  # Replace with the non-admin password
-# operator_username = 'operator'
-# operator_password = 'pass'
 
+
+# The Root should get inside the camera and change the TLS setup.
+# The User should get inside the camera but not allowed to reach the TLS and the operator as well. 
 def verify_only_root_can_update_TLS():
     url = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes'
 
@@ -48,6 +45,7 @@ verify_only_root_can_update_TLS()
 
 import subprocess
 import paramiko
+# The daemon running on prot 2375 while not using the TLS else it's running on port 2376.
 def acap_without_tls_running_on_port_2375():
     url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=stop&package=dockerdwrapper'
     root_response = requests.get(url_stop_daemon, auth=(root_username, root_password))
@@ -66,7 +64,8 @@ def acap_without_tls_running_on_port_2375():
                 process = subprocess.run(command, capture_output=True)
                 logs = process.stdout.decode('utf-8')
                 print(logs)
-
+    else:
+        print('The daemon started on port changed to 2376')
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
