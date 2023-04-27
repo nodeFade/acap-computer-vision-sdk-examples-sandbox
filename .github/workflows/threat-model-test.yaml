@@ -2,8 +2,6 @@ name: threat-modeling
 on:
   push: 
     paths:  
-      - 'acap/**'
-      - '.github/workflows/acap.yaml'
       - '.github/workflows/hello-world.yaml'
       - '.github/workflows/threat-model-test.yaml'
 
