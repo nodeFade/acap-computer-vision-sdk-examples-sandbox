@@ -24,7 +24,7 @@ jobs:
           DEVICE_IP: "${{ secrets.DEVICE_IP }}"
           DEVICE_PASSWORD: 'pass'
         run: |
-          ok=$(curl -v -s --noproxy '*' --anyauth -u <device username: device password> -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://${{ secrets.DEVICE_IP }}/axis-cgi/basicdeviceinfo.cgi)
+          ok=$(curl -v -s --noproxy '*' --anyauth -u ${{ secrets.ROOT_USERNAME }}:${{ secrets.ROOT_PASSWORD}} -k --header "Content-Type: application/json" --request POST --data '{"apiVersion":"1.0","method":"getProperties", "params": {"propertyList": ["Architecture"]}}' http://${{ secrets.DEVICE_IP }}/axis-cgi/basicdeviceinfo.cgi)
           echo  "response from curl= $ok" 
           ok=${ok#*Architecture}
           echo "test=$(echo $ok | cut -d '"' -f 3)" >> $GITHUB_ENV
