@@ -5,7 +5,7 @@ on:
       - 'acap/**'
       - '.github/workflows/acap.yaml'
 
-jobs:
+jobs: 
   build:
     runs-on: ubuntu-latest
     env:   
