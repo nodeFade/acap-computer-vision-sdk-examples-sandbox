@@ -11,7 +11,6 @@ operator_password =sys.argv[7]
 
 
 
-
 print("####################### TEST 1 ######################")
 def verify_only_root_can_update_TLS():
     # The Root should get inside the camera and change the TLS setup.

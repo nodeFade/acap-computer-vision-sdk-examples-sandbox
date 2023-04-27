@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: self-hosted
     container:
-      image: python:3.9
+      image: python:3.9 
     env:   
       EXREPO: acap-computer-vision-examples-sandbox 
       WORKDIR: acap-computer-vision-sdk-examples-sandbox
