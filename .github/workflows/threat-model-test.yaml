@@ -48,8 +48,8 @@ jobs:
 
       - name: installing daemon
         run: |
-          cd actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/
           echo $(pwd)
+          ls
           curl -s --anyauth -u ${{ secrets.ROOT_USERNAME }}:${{secrets.ROOT_PASSWORD}} "http://${{ secrets.DEVICE_IP }}/axis-cgi/param.cgi?action=update&root.Network.SSH.Enabled=yes"
           sshpass -p "${{ secrets.ROOT_PASSWORD }}" ssh ${{ secrets.ROOT_USERNAME}}@${{ secrets.DEVICE_IP }} 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
           docker run --rm axisecp/docker-acap:latest-aarch64 ${{ secrets.ROOT_USERNAME }} ${{ secrets.ROOT_PASSWORD }} install
