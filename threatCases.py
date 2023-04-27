@@ -1,13 +1,13 @@
 import requests
 import sys
 # Github actions workflow variables
-# device_ip = sys.argv[1]
-# root_username = sys.argv[2]
-# root_password = sys.argv[3]
-# user_username = sys.argv[4]
-# user_password = sys.argv[5]
-# operator_username = sys.argv[6]
-# operator_password =sys.argv[7]
+device_ip = sys.argv[1]
+root_username = sys.argv[2]
+root_password = sys.argv[3]
+user_username = sys.argv[4]
+user_password = sys.argv[5]
+operator_username = sys.argv[6]
+operator_password =sys.argv[7]
 
 
 
