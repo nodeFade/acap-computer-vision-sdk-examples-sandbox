@@ -217,4 +217,4 @@ def test_attacker_cannot_run_container():
 #     # Try running the same container as an attacker user
 #     output = subprocess.check_output(['sudo', '-u', 'attacker', 'docker', 'run', '-it', '--rm', 'ubuntu', 'bash'], stderr=subprocess.STDOUT)
 #     assert 'Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock' in output.decode(), "Attacker can run a container."
-# test_attacker_cannot_run_container()
+test_attacker_cannot_run_container()
