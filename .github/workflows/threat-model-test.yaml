@@ -36,7 +36,7 @@ jobs:
 
       - name: Install Docker
         run: |
-          curl https://get.docker.com | bash && sudo systemctl --now enable docker
+          sudo curl https://get.docker.com | bash && sudo systemctl --now enable docker
 
       - name: Add Docker CLI to PATH
         run: |
