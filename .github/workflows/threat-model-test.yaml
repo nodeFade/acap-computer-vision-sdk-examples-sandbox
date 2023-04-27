@@ -23,9 +23,6 @@ jobs:
             
     steps:
       - uses: actions/checkout@v2
-      # - uses: docker/setup-buildx-action@v2
-      #   with:
-      #     install: true
       - name: test to get architecture on another camera
         env: 
           DEVICE_IP: ${{ secrets.DEVICE_IP }}
@@ -51,10 +48,11 @@ jobs:
 
       - name: installing daemon
         run: |
+          cd /acap-computer-vision-sdk-examples-sandbox
           echo $(pwd)
           sshpass -p ${{ secrets.ROOT_PASSWORD }} ssh ${{ secrets.ROOT_USERNAME}}@${{ secrets.DEVICE_IP }} 'command -v containerd >/dev/null 2>&1 && echo Compatible with Docker ACAP || echo Not compatible with Docker ACAP'
           docker run --rm axisecp/docker-acap:latest-aarch64 ${{ secrets.ROOT_USERNAME }} ${{ secrets.ROOT_PASSWORD }} install
-        # Docker CLI executable is not in a directory listed in the PATH variable, you may need to modify the PATH variable to include the location of the Docker CLI executable.
+      
       - name: create certificate for handshake.
         run: | 
           cd /home/fadelb/actions-runner/_work/acap-computer-vision-sdk-examples-sandbox/acap-computer-vision-sdk-examples-sandbox/tls-certs
