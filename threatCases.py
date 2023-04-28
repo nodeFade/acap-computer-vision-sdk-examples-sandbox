@@ -56,20 +56,16 @@ import time
 # The daemon running on prot 2375 while not using the TLS else it's running on port 2376.
 def acap_without_tls_running_on_port_2375():
     url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=stop&package=dockerdwrapper'
-    url_turn_tls_on = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=yes'
     root_response = requests.get(url_stop_daemon, auth=(root_username, root_password))
     time.sleep(10)
     if root_response.status_code == 200:
-        print("The daemon started in off status with enabled TLS")
-        url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper'
-        # url_turn_tls_off = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no'
+        print('Daemon is running')
+        url_turn_tls_off = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no'
         root_response = requests.get(url_turn_tls_off, auth=(root_username, root_password))
-        time.sleep(10)
         if root_response.status_code == 200:
-            print('Daemon is running with enabled TLS')
-            # url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper'
-            url_turn_tls_off = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no'
-            print('TLS disabled')
+            print('TLS is off')
+            url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper'
+            time.sleep(10)
             root_response = requests.get(url_stop_daemon, auth=(root_username, root_password))
             if root_response.status_code == 200:
                 print('The daemon started even if the TLS is disabled and port changed to 2375')
