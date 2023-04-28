@@ -52,7 +52,7 @@ def acap_without_tls_running_on_port_2375():
     root_response = requests.get(url_stop_daemon, auth=(root_username, root_password))
 
     if root_response.status_code == 200:
-        print('Daemon is stopped')
+        print('Daemon is running')
         url_turn_tls_off = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no'
         root_response = requests.get(url_turn_tls_off, auth=(root_username, root_password))
         if root_response.status_code == 200:
