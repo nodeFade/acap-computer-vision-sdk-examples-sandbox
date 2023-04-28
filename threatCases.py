@@ -46,11 +46,12 @@ verify_only_root_can_update_TLS()
 print("####################### TEST 2 ######################")
 import subprocess
 import paramiko
+import time
 # The daemon running on prot 2375 while not using the TLS else it's running on port 2376.
 def acap_without_tls_running_on_port_2375():
     url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper'
     root_response = requests.get(url_stop_daemon, auth=(root_username, root_password))
-
+    time.sleep(5)
     if root_response.status_code == 200:
         print('Daemon is running')
         url_turn_tls_off = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no'
