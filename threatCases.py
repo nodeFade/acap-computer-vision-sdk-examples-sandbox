@@ -9,7 +9,13 @@ user_password = sys.argv[5]
 operator_username = sys.argv[6]
 operator_password =sys.argv[7]
 
-
+# device_ip = '172.25.65.98'  # Replace with the IP address of your device
+# root_username = 'root'  # Replace with your username
+# root_password = 'pass'  # Replace with your password
+# user_username = 'user'  # Replace with a non-admin username
+# user_password = 'pass'  # Replace with the non-admin password
+# operator_username = 'operator'
+# operator_password = 'pass'
 
 print("####################### TEST 1 ######################")
 def verify_only_root_can_update_TLS():
@@ -49,9 +55,9 @@ import paramiko
 import time
 # The daemon running on prot 2375 while not using the TLS else it's running on port 2376.
 def acap_without_tls_running_on_port_2375():
-    url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper'
+    url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=stop&package=dockerdwrapper'
     root_response = requests.get(url_stop_daemon, auth=(root_username, root_password))
-    time.sleep(5)
+    time.sleep(10)
     if root_response.status_code == 200:
         print('Daemon is running')
         url_turn_tls_off = f'http://{device_ip}/axis-cgi/param.cgi?action=update&root.dockerdwrapper.UseTLS=no'
@@ -59,6 +65,7 @@ def acap_without_tls_running_on_port_2375():
         if root_response.status_code == 200:
             print('TLS is off')
             url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper'
+            time.sleep(10)
             root_response = requests.get(url_stop_daemon, auth=(root_username, root_password))
             if root_response.status_code == 200:
                 print('The daemon started even if the TLS is disabled and port changed to 2375')

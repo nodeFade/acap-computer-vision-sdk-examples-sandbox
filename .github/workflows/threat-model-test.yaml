@@ -14,7 +14,7 @@ jobs:
       EXREPO: acap-computer-vision-examples-sandbox 
       WORKDIR: acap-computer-vision-sdk-examples-sandbox
     strategy: 
-      matrix:
+      matrix: 
         include:   
           - arch: aarch64 
           # - arch: armv7hf  
