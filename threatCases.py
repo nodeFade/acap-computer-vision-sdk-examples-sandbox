@@ -48,7 +48,7 @@ import subprocess
 import paramiko
 # The daemon running on prot 2375 while not using the TLS else it's running on port 2376.
 def acap_without_tls_running_on_port_2375():
-    url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=stop&package=dockerdwrapper'
+    url_stop_daemon = f'http://{device_ip}/axis-cgi/applications/control.cgi?action=start&package=dockerdwrapper'
     root_response = requests.get(url_stop_daemon, auth=(root_username, root_password))
 
     if root_response.status_code == 200:

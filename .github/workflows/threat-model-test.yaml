@@ -13,7 +13,7 @@ jobs:
     env:   
       EXREPO: acap-computer-vision-examples-sandbox 
       WORKDIR: acap-computer-vision-sdk-examples-sandbox
-    strategy:
+    strategy: 
       matrix:
         include:   
           - arch: aarch64 
